@@ -2,12 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import config from 'config'
+import router from './routes/post.js';
 
-import postRoutes from './routes/post.js';
 
+// Defining Express 
 const app=express();
-
-app.use('/posts', postRoutes);
 
 /*
 * To handle HTTP POST requests in Express.js version 4 and above, we need to install the middleware module called body-parser.
@@ -16,13 +16,18 @@ app.use('/posts', postRoutes);
 */
 app.use(bodyParser.json({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(cors());
 
 
 
 //To connect mongoDB with Express
-mongoose.connect(CONNECTION_URL,{useNewUrlParser:true, useUnifiedTopology:true})
-    .then(()=>app.listen(PORT,()=>console.log("Server Running on Port 5000")))
+const db=config.get('mongoURI')
+mongoose.connect(db,{useNewUrlParser:true, useUnifiedTopology:true})
+    .then(()=>app.listen(5000 ,()=>console.log("Server Running on Port 5000")))
     .catch((error)=>console.log(error.message));
+
+//Defining the Route
+app.use('/', router);
 
 //To remove the warning related to Mongo DB from console
 mongoose.set('useFindAndModify', false)
