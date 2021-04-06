@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'; 
+import axios from 'axios';
+import {connect} from 'react-redux';
+import { useHistory } from "react-router";
+import {loggedInUser} from '../../actions/action'
 
 
-function LoginPage() {
+function LoginPage(props) {
     const [loginData,setLoginData]=useState({
         email:"",
         password:""
@@ -16,10 +20,23 @@ function LoginPage() {
         }
     }
 
-    const submitData=(event)=>{
+    const history = useHistory();
+    const submitData=  (event)=>{
         event.preventDefault();
-        console.log(loginData)
+        let body=JSON.stringify(loginData)
+        const url='http://localhost:5000/login'
+        const headers = {
+            'Content-Type': 'application/json',
+          }
+        axios.post(url,body ,{ headers: headers})
+        .then(res=> {
+            let userData= res.data
+            props.dispatch(loggedInUser(userData))
+            history.replace('/userHomePage')
+        })
+        .catch(err=>console.log(err,"Error Occured while Posting Data"))   
     }
+
 
     return (
         <React.Fragment>
@@ -48,4 +65,8 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+const mapStateToProps = (state) => {
+   return state
+  }
+ 
+export default connect(mapStateToProps)(LoginPage)

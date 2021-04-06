@@ -2,7 +2,7 @@ import User from '../models/register.js';
 import bcrypt from 'bcrypt';
 
 export const loginPost = async (req,res)=>{
- console.log("login")
+
     try {
         const {email, password}=req.body;
         
@@ -24,11 +24,13 @@ export const loginPost = async (req,res)=>{
        res.json({
            user:{
                id:user._id,
+               name:user.name,
                email:user.email,
            }
        })   
         
-    } catch (error) {
+    }
+     catch (error) {
         res.status(505).json({message:error.message})
         
     }

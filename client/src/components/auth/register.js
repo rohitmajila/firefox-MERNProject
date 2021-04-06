@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios'
 
 
 function RegisterPage() {
@@ -19,7 +20,15 @@ function RegisterPage() {
 
     const submitData=(event)=>{
         event.preventDefault();
-        console.log(registerData)
+        let body=JSON.stringify(registerData)
+        const url='http://localhost:5000/register'
+        const headers = {
+            'Content-Type': 'application/json',
+          }
+        axios.post(url,body ,{ headers: headers})
+        .then(res=>console.log(res, "Data Post Sucessfully"))
+        .catch(err=>console.log(err,"Error Occured while Posting Data"))
+        console.log(body)
     }
 
     return (
