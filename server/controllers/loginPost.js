@@ -1,5 +1,10 @@
 import User from '../models/register.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import config from 'config'
+
+
+const JWT_SECRET=config.get('jwtSecret')
 
 export const loginPost = async (req,res)=>{
 
@@ -7,21 +12,22 @@ export const loginPost = async (req,res)=>{
         const {email, password}=req.body;
         
         // Validation 
-        if( !email || !password){
-            return res.status(400).json({message:'Please enter all fields'})
-        }
-
+        if( !email || !password) throw Error ('Please enter all fields') 
+            
+        
        const user=await User.findOne({email:email});
-       if(!user){
-           res.status(400).json({message:'No Account with this email registered'})
-       }
-
+       if(!user) throw Error ('No Account with this email registered') 
+           
+       
        const isMatch=await bcrypt.compare(password, user.password);
-       if(!isMatch){
-           return res.status(400).json({message:"Invalid Credientials"})
-       }
+       if(!isMatch) throw Error ('Invalid Credientials') 
+       
+
+       const token=jwt.sign({id:user._id}, JWT_SECRET, {expiresIn:3600});
+       if(!token) throw Error ('Coudnt Sign the token')
       
        res.json({
+           token,
            user:{
                id:user._id,
                name:user.name,

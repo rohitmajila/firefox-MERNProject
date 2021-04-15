@@ -19,15 +19,16 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors());
 
 
-
 //To connect mongoDB with Express
 const db=config.get('mongoURI')
 mongoose.connect(db,{useNewUrlParser:true, useUnifiedTopology:true})
     .then(()=>app.listen(5000 ,()=>console.log("Server Running on Port 5000")))
     .catch((error)=>console.log(error.message));
 
+   
 //Defining the Route
 app.use('/', router);
+
 
 //To remove the warning related to Mongo DB from console
 mongoose.set('useFindAndModify', false)
