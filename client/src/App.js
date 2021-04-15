@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import RegisterPage from './components/auth/register';
 import LoginPage from './components/auth/login';
+import {ErrorBoundry} from './ErrorBoundry/erorrBoundry';
 import { logout } from './actions/action'
 import UserHomePage from './components/home/userHomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -48,6 +49,7 @@ function App() {
         </div>
       </nav>
 
+<ErrorBoundry>
       <Router>
         <Switch>
           <Route exact path="/userHomePage">
@@ -61,6 +63,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      </ErrorBoundry>
     </React.Fragment>
 
   )
