@@ -21,13 +21,7 @@ function App() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">My Jobs</a>
-          {currentUser ?
-            <ul className="navbar-nav">
-                <li className="nav-item">
-              <a className="nav-link" href="/userHomePage">Home</a>
-              </li>
-            </ul>
-            :
+          {!currentUser?
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
 
@@ -39,9 +33,13 @@ function App() {
                 </li>
               </ul>
             </div>
-          }
+          :""}
+
           {currentUser ?
             <ul className="navbar-nav ">
+              <li className="nav-item">
+                <a className="nav-link" href="/userHomePage" >Home</a>
+              </li>
               <li className="nav-item">
                 <a className="nav-link" href="/login" onClick={Logout}>Logout</a>
               </li>

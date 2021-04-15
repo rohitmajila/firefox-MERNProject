@@ -1,29 +1,19 @@
-import React, {useState} from 'react'; 
-import {connect} from 'react-redux';
+import React, {useState} from 'react';
+import { useDispatch, useSelector } from "react-redux"; 
 
 
+function UserHomePage() {
 
-function UserHomePage(props) {
-
-    console.log("home page",props)
+    const currentUser=useSelector(state=>state.loggedUser.isLoggedIn)
+    const userName=useSelector(state=>state.loggedUser.user.user.name)
+    console.log(userName)
+    
     return (
         <React.Fragment>
-     <h1>Welcome {props?props.userName?
-                 props.userName.loggedUser?
-                 props.userName.loggedUser.userData?
-                 props.userName.loggedUser.userData.user?
-                 props.userName.loggedUser.userData.user.name?
-                 props.userName.loggedUser.userData.user.name:
-                 "":"":"":"":"":""}</h1>
+     <h1>Welcome {userName}</h1>
 
         </React.Fragment>
     )
 
 }
-
-   const mapStateToProps = state => ({
-    userName:state
-   })
-
-
-export default connect(mapStateToProps)(UserHomePage)
+export default UserHomePage
