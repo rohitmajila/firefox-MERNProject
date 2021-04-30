@@ -22,7 +22,7 @@ static getDerivedStateFromError(error) {
   render(){
     if (this.state.hasError) {
         // You can render any custom fallback UI
-        return <h1>Oops!!!, UI breaks, Please Raise a Support Ticket</h1>;
+        return <h1>Oops!!!, UI breaks, Please Raise a Support Ticket</h1>
       }
       return this.props.children; 
     }  

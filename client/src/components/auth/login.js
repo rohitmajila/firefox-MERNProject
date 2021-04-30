@@ -50,7 +50,7 @@ function LoginPage() {
     return (
         <React.Fragment>
             <form>
-                <div classNameName="container">
+                <div className="container">
                     <div className="row">
                         <div className="col-md-5 offset-md-4">
                             <div className="form-group">

@@ -13,9 +13,12 @@ const app=express();
 * To handle HTTP POST requests in Express.js version 4 and above, we need to install the middleware module called body-parser.
 * body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body.
 * The middleware was a part of Express.js earlier but now we have to install it separately.
+* Express version  > 4.16 did not need to seperatly import body-parser. 
+* Body parser has been re-added under the methods express.json() and express.urlencoded().
 */
-app.use(bodyParser.json({extended:true}));
-app.use(bodyParser.urlencoded({extended:true}))
+
+app.use(express.urlencoded({extended:true}))
+app.use(express.json({extended:true}));
 app.use(cors());
 
 
@@ -25,9 +28,9 @@ mongoose.connect(db,{useNewUrlParser:true, useUnifiedTopology:true})
     .then(()=>app.listen(5000 ,()=>console.log("Server Running on Port 5000")))
     .catch((error)=>console.log(error.message));
 
-   
+    
 //Defining the Route
-app.use('/', router);
+app.use('/', router)
 
 
 //To remove the warning related to Mongo DB from console
