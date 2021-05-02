@@ -2,10 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import RegisterPage from './components/auth/register';
 import LoginPage from './components/auth/login';
-import UserProfile from './components/userData/profile/userProfile';
+// import UserProfile from './components/userData/profile/userProfile';
 import { ErrorBoundry } from './ErrorBoundry/erorrBoundry';
 import { logout } from './actions/action'
 import UserHomePage from './components/home/userHomePage';
+import HospitalBed from './components/hospitalData/hospitalBedData';
+import UserDataPage from './components/home/userDataPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,7 +27,7 @@ function App() {
       {!currentUser ?
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/">FireFox</a>
+            <a className="navbar-brand" href="/hospitalBed">FireFox</a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -41,14 +43,11 @@ function App() {
         :
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/">Home</a>
-            <a className="navbar-brand" href="/">Jobs</a>
-            <input class="form-control col-md-6" type="search" placeholder="Search" aria-label="Search" />&nbsp;&nbsp;
-          <button class="btn btn-primary" type="submit">Search</button>
+           <a className="navbar-brand">COVID-19 Hospital</a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="/profile" >Profile</a>
+                  {/* <a className="nav-link" href="/profile" >Profile</a> */}
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/login" onClick={Logout}>Logout</a>
@@ -71,9 +70,15 @@ function App() {
             <Route exact path="/register">
               <RegisterPage />
             </Route>
-            <Route exact path="/profile">
-              <UserProfile />
+            <Route exact path="/hospitalBed">
+              <HospitalBed />
             </Route>
+            <Route exact path="/hospitalData">
+              <UserDataPage />
+            </Route>
+            {/* <Route exact path="/profile">
+              <UserProfile />
+            </Route> */}
           </Switch>
         </Router>
       </ErrorBoundry>

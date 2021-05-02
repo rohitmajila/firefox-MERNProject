@@ -5,6 +5,7 @@ import '../overview/userOverview.css'
 
 
 function EditUserOverview(props) {
+    const dispatch = useDispatch();
     const userData = useSelector(state => state)
 
     const userEmail = useSelector(state => state.loggedUser.user.user.email)
@@ -49,14 +50,16 @@ function EditUserOverview(props) {
         axios.post(url, body, { headers: headers })
             .then(response => {
                 if(response.status==200){
+                   
                     console.log(response)
                     props.modal(false)
                 }
-                
+                  
             })
     }
-
+  
     return (
+        
         <React.Fragment>
             <div className="container">
                 <div className="row">

@@ -1,4 +1,4 @@
-import {REGISTER_SUCCESS, SET_MESSAGE, USER_DATA, LOGIN_SUCCESS,LOGOUT} from '../constants/constant';
+import {REGISTER_SUCCESS, OBSERVER, USER_DATA, LOGIN_SUCCESS,LOGOUT} from '../constants/constant';
 
 
 export const register=(registerData)=>{
@@ -16,12 +16,21 @@ export const login=(loginData)=>(dispatch)=>{
 }
 
 export const userOverviewData=(userData)=>(dispatch)=>{
-  console.log(userData)
   dispatch( {
     type:USER_DATA,
     data:userData
   })
 }
+
+/** 
+export const observer=(data)=>dispatch=>{
+  console.log(data)
+  dispatch({
+    type:OBSERVER,
+    data:data
+  })
+}
+ */
 
 export const logout=()=>(dispatch)=>{
   dispatch( {

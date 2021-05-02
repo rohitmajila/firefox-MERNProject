@@ -9,9 +9,9 @@ const JWT_SECRET=config.get('jwtSecret')
 export const registerPost = async (req,res)=>{
  
     try {
-        const {name, email, password}=req.body;
+        const {name, email, password, hosState,hosDistrict, hosPinCode}=req.body;
         // Validation 
-        if(!name || !email || !password)
+        if(!name || !email || !password )
         return(
             res.send({
                 message:"Please enter all the fields",
@@ -37,6 +37,9 @@ export const registerPost = async (req,res)=>{
         const newUser=new User({
             name,
             email,
+            hosState,
+            hosDistrict,
+            hosPinCode,
             password:passwordHash
         })
 
@@ -52,7 +55,10 @@ export const registerPost = async (req,res)=>{
             user: {
               id: saveUser.id,
               name: saveUser.name,
-              email: saveUser.email
+              email: saveUser.email,
+              hosState:saveUser.hosState,
+              hosDistrict:saveUser.hosDistrict,
+              hosPinCode:saveUser.hosPinCodes
             }
           });
 

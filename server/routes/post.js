@@ -1,16 +1,24 @@
 import express from 'express';
 import { registerPost} from '../controllers/registerPost.js';
 import { loginPost} from '../controllers/loginPost.js';
-import {userOverviewPost} from '../controllers/userOverview/userOverviewPost.js';
-import {userOverviewGet} from '../controllers/userOverview/userOverviewGet.js'
+import {HospitalBedApi} from '../controllers/HospitalData/HospitalBed.js'
+import {GetHospitalBed, GetHospitalBedByEmailId} from '../controllers/HospitalData/getHospitalBed.js'
+// import {userOverviewPost} from '../controllers/userOverview/userOverviewPost.js';
+// import {userOverviewGet} from '../controllers/userOverview/userOverviewGet.js'
+
+
 
 const router=express.Router();
 
 
 router.post('/register', registerPost);
 router.post('/login', loginPost);
-router.post('/userOverviewPost/:email', userOverviewPost);
-router.get('/userOverviewGet/:email', userOverviewGet)
+router.post('/hospitalBed/:email', HospitalBedApi);
+router.get('/hospitalBedGet', GetHospitalBed);
+router.get('/getHospitalBedByEmailId/:email', GetHospitalBedByEmailId);
+// router.post('/userOverviewPost/:email', userOverviewPost);
+// router.get('/userOverviewGet/:email', userOverviewGet)
+
 
 
 
