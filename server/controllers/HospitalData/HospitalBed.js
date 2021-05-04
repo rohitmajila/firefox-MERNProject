@@ -2,7 +2,6 @@ import HospitalBed from '../../models/hospBed.js';
 
 export const HospitalBedApi= async(req,res)=>{
     const email= req.params.email
-    console.log(email)
     const checkUser= await HospitalBed.findOne({email:email})
     try {
         if(!checkUser){
@@ -12,6 +11,9 @@ export const HospitalBedApi= async(req,res)=>{
                 totBeds:req.body.totBeds,
                 ocupBeds:req.body.ocupBeds,
                 vacBeds:req.body.vacBeds,
+                icuBeds:req.body.icuBeds,
+                oxygenBed:req.body.oxygenBed,
+                normalBed:req.body.normalBed,
                 hosState:req.body.hosState,
                 hosDistrict:req.body.hosDistrict,
                 hosPinCode:req.body.hosPinCode
@@ -33,6 +35,9 @@ export const HospitalBedApi= async(req,res)=>{
                 totBeds:req.body.totBeds,
                 ocupBeds:req.body.ocupBeds,
                 vacBeds:req.body.vacBeds,
+                icuBeds:req.body.icuBeds,
+                oxygenBed:req.body.oxygenBed,
+                normalBed:req.body.normalBed,
                 hosState:req.body.hosState,
                 hosDistrict:req.body.hosDistrict,
                 hosPinCode:req.body.hosPinCode

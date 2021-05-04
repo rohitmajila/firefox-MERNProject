@@ -4,6 +4,8 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import './hospitalData.css'
+import './agGrid.css'
 
 
 const HospitalBed = () => {
@@ -30,36 +32,42 @@ const HospitalBed = () => {
             })
     }
 
+    const onFirstDataRendered = (params) => {
+        params.api.sizeColumnsToFit();
+    };
 
     return (
         <React.Fragment>
-            <h1>Total Hospital Bed</h1>
+            <div className="header">
+                Total Hospital Bed
+             </div>
             <div style={{ width: '100%', height: '100%' }}>
-            <div
-                style={{
-                    height: '100vh',
-                    width: '100%',
-                }}
-                className="ag-theme-alpine"
-            >
-                <AgGridReact
-                    defaultColDef={{
-                        filter: 'agTextColumnFilter',
-                        floatingFilter: true,
-                        resizable: true,
+                <div
+                    style={{
+                        height: '100vh',
+                        width: '100%',
                     }}
-                    rowData={rowData}
-                    onGridReady={onGridReady}
+                    className="ag-theme-alpine"
                 >
-                    <AgGridColumn headerName="Hospital Name" field="hosName" />
-                    <AgGridColumn headerName="State" field="" />
-                    <AgGridColumn headerName="District" field="" />
-                    <AgGridColumn headerName="Pin Code" field="" />
-                    <AgGridColumn headerName="Total COVID Beds" field="totBeds" />
-                    <AgGridColumn headerName="Bed Occupied" field="ocupBeds" />
-                    <AgGridColumn headerName="Bed Vacent" field="vacBeds" />
-                </AgGridReact>
-            </div>
+                    <AgGridReact
+                        defaultColDef={{
+                            filter: 'agTextColumnFilter',
+                            floatingFilter: true,
+                            resizable: true,
+                        }}
+                        rowData={rowData}
+                        onGridReady={onGridReady}
+                        onFirstDataRendered={onFirstDataRendered}
+                    >
+                        <AgGridColumn headerName="Hospital Name" field="hosName" />
+                        <AgGridColumn headerName="State" field="hosState" />
+                        <AgGridColumn headerName="District" field="hosDistrict" />
+                        <AgGridColumn headerName="Pin Code" field="hosPinCode" />
+                        <AgGridColumn headerName="Total COVID Bed" field="totBeds" />
+                        <AgGridColumn headerName="Bed Occupied" field="ocupBeds" />
+                        <AgGridColumn headerName="Bed Vacent"  field="vacBeds" />
+                    </AgGridReact>
+                </div>
             </div>
         </React.Fragment>
     )
