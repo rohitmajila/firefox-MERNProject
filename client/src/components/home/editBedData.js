@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useSelector} from "react-redux";
+import {useSelector,useDispatch} from "react-redux";
+// import {observerData} from '../../actions/action'
 
 
 function UpdateBedData() {
+    const dispatch=useDispatch()
     const covidBedData = useSelector(state => state)
     const [bedValid, setBedValid] = useState("")
     const [vacBedValid, setVacBedValid]=useState("")
@@ -78,6 +80,8 @@ function UpdateBedData() {
                 console.log(response)
                 if (response.status == 200) {
                     console.log(response)
+                    window.location.reload()
+                    // dispatch(observerData(true))
                 }
                 else {
                     alert("Error Occured While Submiting Data")

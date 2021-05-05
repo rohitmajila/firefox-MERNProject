@@ -19,13 +19,13 @@ function UserDataPage() {
     const [gridColumnApi, setGridColumnApi] = useState(null);
     const [rowData, setRowData] = useState(null);
     const [openModal, setOpenModal]=useState(false);
-
+   
     const onGridReady = (params) => {
         setGridApi(params.api);
         setGridColumnApi(params.columnApi);
 
     }
-    const userData = useSelector(state => state)
+   const userData=useSelector(state=>state)
     const [hosBed, setHosBed] = useState({
         email: null,
         hosName: null,
@@ -51,8 +51,8 @@ function UserDataPage() {
     }
 
     React.useEffect(() => {
+        
         const email = userData?.loggedUser?.user?.user?.email
-        console.log(email)
         const url = `http://localhost:5000/getHospDataByEmailId/${email}`
         axios.get(url)
             .then(response => {

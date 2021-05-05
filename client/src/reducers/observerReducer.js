@@ -1,19 +1,19 @@
-import {OBSERVER} from '../constants/constant';
+// import {OBSERVER} from '../constants/constant';
 
-export default function observerReducer(state=[], action){
-    switch (action.type) {
+// export default function observerReducer(state=[], action){
+//     switch (action.type) {
         
-        case OBSERVER:
-            console.log("OBSERVER Reducer", action)
-            return{
-                ...state
-            }
+//         case OBSERVER:
+//             console.log("OBSERVER Reducer", action)
+//             return{
+//                 ...state
+//             }
             
-            break;
+//             break;
     
-        default:
-            return state
-            break;
-    }
+//         default:
+//             return state
+//             break;
+//     }
 
-}
+// }
