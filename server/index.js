@@ -1,4 +1,6 @@
 import express from 'express';
+import https from 'https';
+import fs from 'fs';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -32,10 +34,17 @@ app.use(express.json({extended:true}));
 app.use(helmet());
 app.use(helmet.frameguard());//frameguard() function to prevent clickjacking
 
+
+// https.createServer({
+//     key:fs.readFile("sshServer.key"),
+//     cert:fs.readFile("sshServer.cert"),
+// },app)
+
 //To connect mongoDB with Express
 const db=config.get('mongoURI');
 mongoose.connect(db,{useNewUrlParser:true, useUnifiedTopology:true})
-    .then(()=>app.listen(5000 ,()=>console.log("Server Running on Port 5000")))
+    .then(()=>app
+    .listen(5000 ,()=>console.log("Server Running on Port 5000")))
     .catch((error)=>console.log(error.message));
 
 //User defind Request Logging Middleware
