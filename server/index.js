@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import config from 'config';
 import helmet from 'helmet';
+import dotenv from 'dotenv'
 import router from './routes/post.js';
 import requestLogger from './utilities/requestLogger.js';
 import errorLogger from './utilities/errorLogger.js';
@@ -34,11 +35,6 @@ app.use(express.json({extended:true}));
 app.use(helmet());
 app.use(helmet.frameguard());//frameguard() function to prevent clickjacking
 
-
-// https.createServer({
-//     key:fs.readFile("sshServer.key"),
-//     cert:fs.readFile("sshServer.cert"),
-// },app)
 
 //To connect mongoDB with Express
 const db=config.get('mongoURI');

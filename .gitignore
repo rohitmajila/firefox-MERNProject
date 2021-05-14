@@ -1,2 +1,11 @@
 #Node Modules
 node_modules/
+
+
+#Hidden Files
+.*
+
+
+#Congig FIle
+config
+
