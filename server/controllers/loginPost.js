@@ -1,10 +1,13 @@
 import User from '../models/register.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
 import config from 'config'
+dotenv.config()
 
 
-const JWT_SECRET=config.get('jwtSecret')
+// const JWT_SECRET=config.get('jwtSecret')//using config
+const JWT_SECRET=process.env.jwtSecret
 
 export const loginPost = async (req,res)=>{
 
