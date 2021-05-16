@@ -6,11 +6,12 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import config from 'config';
 import helmet from 'helmet';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import path from 'path'
 import router from './routes/post.js';
 import requestLogger from './utilities/requestLogger.js';
 import errorLogger from './utilities/errorLogger.js';
-
+const __dirname = path.resolve();
 
 
 // Defining Express 
@@ -32,7 +33,7 @@ app.use(cors());
 */
 app.use(express.urlencoded({extended:true}))
 app.use(express.json({extended:true}));
-
+app.use(express.static(path.join(__dirname, "client/build")))
 
 
 
