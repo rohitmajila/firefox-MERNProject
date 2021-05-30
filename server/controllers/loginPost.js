@@ -15,15 +15,33 @@ export const loginPost = async (req,res)=>{
         const {email, password}=req.body;
         
         // Validation 
-        if( !email || !password) throw Error ('Please enter all fields') 
+        if( !email || !password){
+            return (
+                res.send({
+                    message:"Please Enter all the fields",
+                    status:400
+                })
+            )
+        } 
             
-        
+        //Existing user
        const user=await User.findOne({email:email});
-       if(!user) throw Error ('No Account with this email registered') 
+       if(!user) {
+        return (
+            res.send({
+                message:"No Account with this Email Registred",
+                status:400
+            })
+        )
+       }
            
-       
+       //Password validation
        const isMatch=await bcrypt.compare(password, user.password);
-       if(!isMatch) throw Error ('Invalid Credientials') 
+       if(!isMatch) {
+       return res.send({
+           message:"Invalid Credientials"
+       })
+      }
        
 
        const token=jwt.sign({id:user._id}, JWT_SECRET, {expiresIn:3600});

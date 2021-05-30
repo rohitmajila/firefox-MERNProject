@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import RegisterPage from './components/auth/register';
 import LoginPage from './components/auth/login';
@@ -7,6 +8,7 @@ import { logout } from './actions/action'
 import UserHomePage from './components/home/userHomePage';
 import HospitalBed from './components/hospitalData/hospitalBedData';
 import UserDataPage from './components/home/userDataPage';
+import DoctorRoster from './components/doctorRoster/doctorRoster'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,8 +20,10 @@ function App() {
   const Logout = () => {
     localStorage.removeItem("user")
     dispatch(logout())
-
   }
+
+  const userHomeLogin=useSelector(state=>state?.CovidBedData?.userHome)
+  
   return (
 
     <React.Fragment>
@@ -42,13 +46,12 @@ function App() {
         :
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-           <a className="navbar-brand" href="/userHomePage">COVID-19 Hospital</a>
+          {!userHomeLogin?
+           <a className="navbar-brand" href="/userHomePage">COVID-19 Hospital</a>:
+           <a className="navbar-brand" href="/doctorRoster">Doctor Addition</a>}
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/hospitalData" >Dashboard</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/login" onClick={Logout}>Logout</a>
@@ -65,18 +68,31 @@ function App() {
             <Route exact path="/userHomePage">
               <UserHomePage />
             </Route>
+
             <Route exact path="/login">
+            <div className="backgroundImage">
               <LoginPage />
+              </div>
             </Route>
-            <Route exact path="/register">
+
+            <Route exact path="/register" >
+              <div className="backgroundImage">
               <RegisterPage />
+              </div>
             </Route>
-            <Route exact path="/">
+
+            <Route exact path="/">        
               <HospitalBed />
             </Route>
+
             <Route exact path="/hospitalData">
               <UserDataPage />
             </Route>
+
+            <Route exact path="/doctorRoster">
+              <DoctorRoster />
+            </Route>
+            
           </Switch>
         </Router>
       </ErrorBoundry>

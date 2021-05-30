@@ -2,7 +2,7 @@ import { REGISTER_SUCCESS, SET_MESSAGE, REGISTER_FAIL, LOGIN_SUCCESS, LOGOUT } f
 
 
 const user = JSON.parse(localStorage.getItem("user"));
-
+console.log(user)
 const initialState=user?
 {isLoggedIn:true, user} 
 :
@@ -11,14 +11,12 @@ const initialState=user?
 export default function loggedUser(state = initialState, action) {
     switch (action.type) {
         case REGISTER_SUCCESS:
-            console.log("In  reducer register", action)
             return {
                 ...state,
                 isLoggedIn: false
             }
 
         case LOGIN_SUCCESS:
-            console.log("In  reducer Login", action)
             return {
                 ...state,
                 isLoggedIn: true,
@@ -26,7 +24,6 @@ export default function loggedUser(state = initialState, action) {
             }
 
             case LOGOUT:
-                console.log("In  reducer Logout", action)
                 return {
                     ...state,
                     isLoggedIn: false,

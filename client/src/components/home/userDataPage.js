@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import UpdateBedData from './editBedData'
@@ -34,7 +33,8 @@ function UserDataPage() {
         vacBeds: null,
         hosState: null,
         hosDistrict: null,
-        hosPinCode: null
+        hosPinCode: null,
+        phoneNo:null
     })
 
     const onFirstDataRendered = (params) => {
@@ -42,7 +42,7 @@ function UserDataPage() {
     };
 
     const onSelectionChanged = () => {
-        var selectedRows = gridApi.getSelectedRows();
+        let selectedRows = gridApi.getSelectedRows();
             selectedRows.length>0?setOpenModal(true):setOpenModal(false)
       };
 
@@ -51,13 +51,12 @@ function UserDataPage() {
     }
 
     React.useEffect(() => {
-        
         const email = userData?.loggedUser?.user?.user?.email
         const url = `http://localhost:5000/getHospDataByEmailId/${email}`
         axios.get(url)
             .then(response => {
+                console.log(response)
                 if (response.status == 200) {
-                    console.log(response)
                     setHosBed({
                         email: response?.data?.hospitalBedData?.email,
                         hosName: response?.data?.hospitalBedData?.hosName,
@@ -67,13 +66,12 @@ function UserDataPage() {
                         hosState: response?.data?.hospitalBedData?.hosState,
                         hosDistrict: response?.data?.hospitalBedData?.hosDistrict,
                         hosPinCode: response?.data?.hospitalBedData?.hosPinCode,
+                        phoneNo:response?.data?.hospitalBedData?.phoneNo
                     })
                     dispatch(CovidBedData(response.data))
                     let dataArray = []
                     dataArray.push(response.data.hospitalBedData)
                     setRowData(dataArray)
-
-
                 }
 
             })
@@ -82,7 +80,7 @@ function UserDataPage() {
     return (
         <React.Fragment>
             <h1>Welcome {hosBed?.hosName}</h1> 
-            <div>
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-9">
                     <div className="header">
@@ -91,6 +89,7 @@ function UserDataPage() {
                         <div
                             style={{
                                 height: '22vh',
+                            
                             }}
                             className="ag-theme-alpine"
                         >
@@ -122,9 +121,10 @@ function UserDataPage() {
                         <div class="card">
                             <h5 class="card-header">Contact Details</h5>
                             <div >
-                                <h6>{hosBed.hosName}</h6>
-                                <h6>{hosBed.hosDistrict}, {hosBed.hosState}, {hosBed.hosPinCode}</h6>
-                                <h6>{hosBed.email}</h6>
+                                <h6>Hospital Name :{hosBed.hosName}</h6>
+                                <h6>Address :{hosBed.hosDistrict}, {hosBed.hosState}, {hosBed.hosPinCode}</h6>
+                                <h6>Email :{hosBed.email}</h6>
+                                <h6>Phone Number :{hosBed.phoneNo}</h6>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,6 @@ function UserDataPage() {
 
                 </div>
             </div>
-
             {openModal ?
                 <div className="overlay">
                     <div class="modalStyle">

@@ -10,27 +10,30 @@ dotenv.config()
 const JWT_SECRET=process.env.jwtSecret
 
 export const registerPost = async (req,res)=>{
- 
+
     try {
-        const {name, email, password, hosState,hosDistrict, hosPinCode}=req.body;
+        const {name, email, phoneNo, password, hosState,hosDistrict, hosPinCode}=req.body;
         // Validation 
-        if(!name || !email || !password )
+        if(!name || !email || !password|| !hosState || !hosDistrict || !hosPinCode || !phoneNo){
         return(
             res.send({
                 message:"Please enter all the fields",
                 status:400
             })
         )
-
+        }
         // Check for Existing User
         const existingUser= await User.findOne({email:email});
         if(existingUser){
+            
             return(
             res.send({
                 message:"An Account Already exists",
                 status:400
             })
+            
             )
+           
         }
 
         // Add new user whith encrypted password
@@ -40,6 +43,7 @@ export const registerPost = async (req,res)=>{
         const newUser=new User({
             name,
             email,
+            phoneNo,
             hosState,
             hosDistrict,
             hosPinCode,
@@ -62,7 +66,8 @@ export const registerPost = async (req,res)=>{
               hosState:saveUser.hosState,
               hosDistrict:saveUser.hosDistrict,
               hosPinCode:saveUser.hosPinCodes
-            }
+            },
+            status:200
           });
 
         

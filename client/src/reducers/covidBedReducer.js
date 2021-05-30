@@ -1,22 +1,30 @@
-import {COVID_BED_DATA} from '../constants/constant'
+import { COVID_BED_DATA, USER_HOME } from '../constants/constant'
 
-let initialState={
-    covidBedData:null
+let initialState = {
+    covidBedData: null,
+    userHome:null
 }
-export function CovidBedData(state=initialState, action){
+export function CovidBedData(state = initialState, action) {
     switch (action.type) {
         case COVID_BED_DATA:
             console.log("COVID BED Dtaa Reducer", action)
-            return{
+            return {
                 ...state,
-                covidBedData:action.data
+                covidBedData: action.data,
+                userHome:true
             }
-            
-            break;
-    
+
+        case USER_HOME:
+            console.log("USER HOME", action)
+            return {
+                ...state,
+                userHome: true
+            }
+
+
         default:
             return state
-            break;
+            
     }
 
 

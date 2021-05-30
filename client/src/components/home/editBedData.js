@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useSelector,useDispatch} from "react-redux";
-// import {observerData} from '../../actions/action'
+import {useSelector} from "react-redux";
 
 
 function UpdateBedData() {
-    const dispatch=useDispatch()
     const covidBedData = useSelector(state => state)
+    console.log(covidBedData)
     const [bedValid, setBedValid] = useState("")
-    const [vacBedValid, setVacBedValid]=useState("")
     const [bedData, setCovidBedData] = useState({
         email: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.email,
         hosDistrict: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.hosDistrict,
@@ -21,6 +19,8 @@ function UpdateBedData() {
         icuBeds: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.icuBeds,
         oxygenBed: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.oxygenBed,
         normalBed: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.normalBed,
+        phoneNo: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.phoneNo,
+        hosIsActive: covidBedData?.CovidBedData?.covidBedData?.hospitalBedData?.hosIsActive,
     })
 
     const handleChange = (type, state, value) => {
@@ -37,7 +37,22 @@ function UpdateBedData() {
         }
     }
 
+    const validateData = () => {
+        return new Promise((resolve, reject) => {
+            let total = bedData.totBeds;
+            let occupied = bedData.ocupBeds;
+            let vacent = bedData.vacBeds;
 
+            if ((Number(total) === Number(occupied) + Number(vacent)) &&
+                (Number(bedData.vacBeds) === Number(bedData.icuBeds) + Number(bedData.oxygenBed) + Number(bedData.normalBed))) {
+                resolve(true)
+            }
+            else {
+                resolve(false)
+            }
+        })
+
+    }
 
     const submitData = (event) => {
         event.preventDefault();
@@ -52,25 +67,15 @@ function UpdateBedData() {
             normalBed: bedData.normalBed,
             hosState: bedData.hosState,
             hosDistrict: bedData.hosDistrict,
-            hosPinCode: bedData.hosPinCode
+            hosPinCode: bedData.hosPinCode,
+            phoneNo:bedData.phoneNo,
+            hosIsActive:bedData.hosIsActive
         }
         let body = JSON.stringify(hospitalBedBody)
-        let total = bedData.totBeds
-        let occupied = bedData.ocupBeds;
-        let vacent = bedData.vacBeds
-        let icuBeds= bedData.icuBeds
-        let oxygenBed=bedData.oxygenBed
-        let normalBed= bedData.normalBed
         let email = bedData.email
 
-        if(Number(vacent)===Number(icuBeds)+Number(oxygenBed)+ Number(normalBed)){
-            setVacBedValid("")
-        }
-        else{
-            setVacBedValid("Total Vacent beds must be equal to ICU Beds + oxygen Beds + Normal Bed")
-        }
-
-        if ((Number(total) === Number(occupied) + Number(vacent)) && vacBedValid=="") {
+        validateData().then(promise => {
+            if (promise) {
             setBedValid("")
             const url = `http://localhost:5000/hospitalBed/${email}`
             const headers = {
@@ -79,18 +84,18 @@ function UpdateBedData() {
             axios.post(url, body, { headers: headers }).then(response => {
                 console.log(response)
                 if (response.status == 200) {
-                    console.log(response)
                     window.location.reload()
-                    // dispatch(observerData(true))
                 }
                 else {
                     alert("Error Occured While Submiting Data")
                 }
             })
         }
-        else {
-            setBedValid("Total COVID beds must be equal to Ocupied Beds + Vacent Beds")
+        else{
+            setBedValid("Total COVID beds must be equal to Ocupied Beds + Vacent Beds and Vacent beds must be equal to icu beds + oxygen beds + normal beds")
         }
+        })
+        
     }
 
 
@@ -137,12 +142,13 @@ function UpdateBedData() {
                     <label htmlFor="userName">Normal COVID Beds</label>
                     <input type="text" class="form-control" onChange={((e) => handleChange("input", "normalBed", e.target.value))} value={bedData.normalBed} />
                 </div>
-
+        
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onClick={submitData}>Update Data</button><br/>
-                    <span style={{ color: "red" }}>{bedValid ? bedValid:vacBedValid?vacBedValid:""}</span><br />
+                    <button type="submit" class="btn btn-primary" onClick={submitData}>Update Data</button>
                 </div>
+                {bedValid?<span style={{color:"red"}} >{bedValid ? bedValid:""}</span>:""}
             </div>
+            
         </React.Fragment>
     )
 }

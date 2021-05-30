@@ -1,4 +1,4 @@
-import {REGISTER_SUCCESS, COVID_BED_DATA, USER_DATA, OBSERVER, LOGIN_SUCCESS,LOGOUT} from '../constants/constant';
+import {REGISTER_SUCCESS, COVID_BED_DATA, USER_DATA, USER_HOME, LOGIN_SUCCESS,LOGOUT} from '../constants/constant';
 
 
 export const register=(registerData)=>{
@@ -29,13 +29,12 @@ export const CovidBedData=(covidBedData)=>(dispatch)=>{
   })
 }
 
-// export const observerData=(observerData)=>(dispatch)=>{
-//   console.log("observer", observerData)
-//   dispatch( {
-//     type:OBSERVER,
-//     data:observerData
-//   })
-// }
+export const userHome=(data)=>(dispatch)=>{
+  dispatch({
+    type:USER_HOME,
+    data:data
+  })
+}
 
 export const logout=()=>(dispatch)=>{
   dispatch( {
