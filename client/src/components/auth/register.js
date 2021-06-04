@@ -90,7 +90,7 @@ function RegisterPage() {
                                 <input type="password" class="form-control" id="password" onChange={((e) => handleChange("input", "password", e.target.value))} value={registerData.password} />
                             </div>
                             <div class="form-group">
-                                <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button>
+                                <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button> <a className="text-light" href="/login">Already a Member</a>
                             </div>
                            {successful==false?<div className="alert alert-warning">{errorMsg}</div>:""}
                         </div>

@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router';
+import { useSelector, useDispatch } from "react-redux";
 import "./docRoster.css"
 
 
 
 
-function DoctorRoster() {
+function DoctorRoster(props) {
+    const history=useHistory();
+    const userData = useSelector(state => state)
+    const email = userData?.loggedUser?.user?.user?.email
     const [tabChange, setTabChange] = useState("personal")
     const [proffesionalTabChange, setProffesionalTabChange] = useState("professional")
     const [personalCount, setPersonalCount] = useState(2)
     const [professionalCount, setProfessionalCount] = useState(2)
     const [doctorData, setDoctorData] = useState({
-        firstName: null,
-        lastName: null,
-        fullName: null,
-        dateOfBirth: null,
-        email: null,
-        phoneNumber: null,
-        bloodGroup: null,
-        graduationCollege: null,
-        graduationPercentage: null,
-        masterCollege: null,
-        masterPercentage: null,
-        totalExperience: null,
-        departName: null,
-        specilzation: null,
-        docDescription: null,
-        researchDescription: null
+        email:email,
+        firstName: props?.doctorData?.firstName,
+        lastName: props?.doctorData?.lastName,
+        fullName: props?.doctorData?.fullName,
+        dateOfBirth: props?.doctorData?.dateOfBirth,
+        doctorEmail: props?.doctorData?.doctorEmail,
+        phoneNumber: props?.doctorData?.phoneNumber,
+        bloodGroup: props?.doctorData?.bloodGroup,
+        graduationCollege: props?.doctorData?.graduationCollege,
+        graduationPercentage: props?.doctorData?.graduationPercentage,
+        masterCollege:  props?.doctorData?.masterCollege,
+        masterPercentage:  props?.doctorData?.masterPercentage,
+        totalExperience: props?.doctorData?.totalExperience,
+        departName: props?.doctorData?.departName,
+        specilzation: props?.doctorData?.specilzation,
+        docDescription: props?.doctorData?.docDescription,
+        researchDescription: props?.doctorData?.researchDescription
     })
 
     const handleTabChange = (tab) => {
@@ -53,9 +59,18 @@ function DoctorRoster() {
 
     const submitData = (event) => {
         event.preventDefault();
-        console.log(doctorData)
+        const url=`http://localhost:5000/doctorData/${doctorData.doctorEmail}`
+        let body=JSON.stringify(doctorData);
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+        axios.post(url,body,{ headers: headers }).then(response=>{
+            console.log(response)
+            history.push('/allDoctorData');
+        })
+       
     }
-
+console.log(props)
     return (
         <React.Fragment>
             <div>
@@ -88,19 +103,19 @@ function DoctorRoster() {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label htmlFor="dateOfBirth">Date Of Birth </label>
-                                    <input type="text" class="form-control" value={doctorData.dateOfBirth} onChange={(e) => handelChange("input", "dateOfBirth", e.target.value)} />
+                                    <input type="date" class="form-control" value={doctorData.dateOfBirth} onChange={(e) => handelChange("input", "dateOfBirth", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="email">Email</label>
-                                    <input type="text" class="form-control" value={doctorData.email} onChange={(e) => handelChange("input", "email", e.target.value)} />
+                                    <label htmlFor="doctorEmail">Email</label>
+                                    <input type="email" class="form-control" value={doctorData.doctorEmail} onChange={(e) => handelChange("input", "doctorEmail", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label htmlFor="phoneNumber">Phone Number</label>
-                                    <input type="text" class="form-control" value={doctorData.phoneNumber} onChange={(e) => handelChange("input", "phoneNumber", e.target.value)} />
+                                    <input type="number" min={0}  class="form-control" value={doctorData.phoneNumber} onChange={(e) => handelChange("input", "phoneNumber", e.target.value)} />
                                 </div>
                             </div>
                         </div>
@@ -120,8 +135,8 @@ function DoctorRoster() {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="graduationPercentage">Graduation Percentage </label>
-                                    <input type="text" class="form-control" value={doctorData.graduationPercentage} onChange={(e) => handelChange("input", "graduationPercentage", e.target.value)} />
+                                    <label htmlFor="graduationPercentage">Graduation Percentage/CGPA </label>
+                                    <input type="number" class="form-control" value={doctorData.graduationPercentage} onChange={(e) => handelChange("input", "graduationPercentage", e.target.value)} />
                                 </div>
                             </div>
                         </div>
@@ -135,14 +150,14 @@ function DoctorRoster() {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="masterPercentage">Master's Percentage</label>
-                                    <input type="text" class="form-control" value={doctorData.masterPercentage} onChange={(e) => handelChange("input", "masterPercentage", e.target.value)} />
+                                    <label htmlFor="masterPercentage">Master's Percentage/CGPA</label>
+                                    <input type="number" class="form-control" value={doctorData.masterPercentage} onChange={(e) => handelChange("input", "masterPercentage", e.target.value)} />
                                 </div>
                             </div>
                         </div>
                     </div>
                     : ""}
-
+                <br/>
                 <div className="docHeader" type="button" onClick={() => handleTabChange("professional")}>Professional Details</div>
                 {proffesionalTabChange == "professional" && professionalCount % 2 == 0 ?
                     <div className="container-fluid">
@@ -150,7 +165,7 @@ function DoctorRoster() {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label htmlFor="totalExperience">Total Experience </label>
-                                    <input type="text" class="form-control" value={doctorData.totalExperience} onChange={(e) => handelChange("input", "totalExperience", e.target.value)} />
+                                    <input type="number" class="form-control" value={doctorData.totalExperience} onChange={(e) => handelChange("input", "totalExperience", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -186,9 +201,9 @@ function DoctorRoster() {
                         </div>
                     </div>
                     : ""}
-
+                <br/>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onClick={submitData}>Register</button>
+                    <button type="submit" class="btn btn-primary" onClick={submitData}>Submit</button>
                 </div>
             </div>
 

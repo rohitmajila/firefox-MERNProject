@@ -1,0 +1,11 @@
+
+
+.ag-theme-alpine {
+    --ag-foreground-color: rgb(92, 125, 194);
+}
+
+/* or write CSS selectors to make customisations beyond what the parameters support */ */
+ .ag-theme-alpine .ag-header {
+    text-align: left;
+    font-style: oblique;
+}

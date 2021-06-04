@@ -1,7 +1,7 @@
 import { REGISTER_SUCCESS, SET_MESSAGE, REGISTER_FAIL, LOGIN_SUCCESS, LOGOUT } from '../constants/constant';
 
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(sessionStorage.getItem("user"));
 console.log(user)
 const initialState=user?
 {isLoggedIn:true, user} 

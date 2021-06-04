@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from "react-router";
 import { login } from '../../actions/action'
-import { useDispatch, useSelector } from "react-redux";
 
 
 
 
-function LoginPage() {
-    const dispatch = useDispatch();
+
+function UserLogin() {
     const [validation, setvalidation] = useState(null)
     const [errorMsg, setErrorMsg] = useState(null)
-    const loggedIn = useSelector(state => state.loggedUser.isLoggedIn)
     const [loginData, setLoginData] = useState({
-        email: "",
-        password: ""
+        userEmail: "",
+        userPassword: ""
     })
 
     const handleChange = (type, state, value) => {
@@ -30,30 +28,31 @@ function LoginPage() {
     const submitData = (event) => {
         event.preventDefault();
         let body = JSON.stringify(loginData)
-        const url = 'http://localhost:5000/login'
+        console.log(body)
+        const url = 'http://localhost:5000/userLogin'
         const headers = {
             'Content-Type': 'application/json',
         }
         axios.post(url, body, { headers: headers })
             .then(res => {
                 console.log(res)
-                if (res.data.token) {
-                    sessionStorage.setItem('user', JSON.stringify(res.data))
-                    setvalidation(true)
-                    let userData = res.data
-                    dispatch(login(userData))
-                }
-                else {
-                    setvalidation(false)
-                    setErrorMsg(res.data.message)
-                }
+                // if (res.data.token) {
+                //     sessionStorage.setItem('user', JSON.stringify(res.data))
+                //     setvalidation(true)
+                //     let userData = res.data
+                //     dispatch(login(userData))
+                // }
+                // else {
+                //     setvalidation(false)
+                //     setErrorMsg(res.data.message)
+                // }
             })
             .catch(err => console.log(err, "Error Occured while Posting Data"))
     }
 
-    if (loggedIn) {
-        return <Redirect to="/userHomePage" />
-    }
+    // if (loggedIn) {
+    //     return <Redirect to="/userHomePage" />
+    // }
 
     return (
         <React.Fragment>
@@ -62,13 +61,13 @@ function LoginPage() {
                     <div className="row">
                         <div className="col-md-5 offset-md-4">
                             <div className="form-group">
-                                <label htmlFor="registerEmail" className="text-light">Email address *</label>
-                                <input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "email", e.target.value))} value={loginData.email} />
+                                <label htmlFor="userEmail" className="text-light">Email address *</label>
+                                <input type="email" className="form-control" id="userEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "userEmail", e.target.value))} value={loginData.userEmail} />
                                 <small id="emailHelp" className="form-text text-light">We'll never share your email with anyone else.</small>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password" className="text-light">Password *</label>
-                                <input type="password" className="form-control" id="password" onChange={((e) => handleChange("input", "password", e.target.value))} value={loginData.password} />
+                                <label htmlFor="userPassword" className="text-light">Password *</label>
+                                <input type="password" className="form-control" id="userPassword" onChange={((e) => handleChange("input", "userPassword", e.target.value))} value={loginData.userPassword} />
                             </div>
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button>
@@ -83,4 +82,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage;
+export default UserLogin;

@@ -1,0 +1,10 @@
+Wed Jun 02 2021 - SyntaxError: Unexpected string in JSON at position 21
+    at JSON.parse (<anonymous>)
+    at parse (D:\RohitVSFOlder\ReactSolution\FullStackApp\server\node_modules\body-parser\lib\types\json.js:89:19)
+    at D:\RohitVSFOlder\ReactSolution\FullStackApp\server\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (D:\RohitVSFOlder\ReactSolution\FullStackApp\server\node_modules\raw-body\index.js:224:16)
+    at done (D:\RohitVSFOlder\ReactSolution\FullStackApp\server\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (D:\RohitVSFOlder\ReactSolution\FullStackApp\server\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (node:events:390:22)
+    at endReadableNT (node:internal/streams/readable:1307:12)
+    at processTicksAndRejections (node:internal/process/task_queues:81:21)
