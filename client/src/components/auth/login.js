@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 function LoginPage() {
     const dispatch = useDispatch();
-    const [validation, setvalidation] = useState(null)
-    const [errorMsg, setErrorMsg] = useState(null)
+    const [validation, setvalidation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const loggedIn = useSelector(state => state.loggedUser.isLoggedIn)
     const [loginData, setLoginData] = useState({
         email: "",

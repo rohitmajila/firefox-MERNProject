@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Redirect } from "react-router";
-import { login } from '../../actions/action'
+import { userLogin } from '../../actions/action';
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 
 
 function UserLogin() {
-    const [validation, setvalidation] = useState(null)
-    const [errorMsg, setErrorMsg] = useState(null)
+    const dispatch = useDispatch();
+    const loggedIn = useSelector(state => state.userLoggedUser.isLoggedIn);
+    const [validation, setvalidation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const [loginData, setLoginData] = useState({
         userEmail: "",
         userPassword: ""
@@ -36,23 +39,23 @@ function UserLogin() {
         axios.post(url, body, { headers: headers })
             .then(res => {
                 console.log(res)
-                // if (res.data.token) {
-                //     sessionStorage.setItem('user', JSON.stringify(res.data))
-                //     setvalidation(true)
-                //     let userData = res.data
-                //     dispatch(login(userData))
-                // }
-                // else {
-                //     setvalidation(false)
-                //     setErrorMsg(res.data.message)
-                // }
+                if (res.data.token) {
+                    sessionStorage.setItem('userLoginData', JSON.stringify(res.data))
+                    setvalidation(true)
+                    let userData = res.data
+                    dispatch(userLogin(userData))
+                }
+                else {
+                    setvalidation(false)
+                    setErrorMsg(res.data.message)
+                }
             })
             .catch(err => console.log(err, "Error Occured while Posting Data"))
     }
 
-    // if (loggedIn) {
-    //     return <Redirect to="/userHomePage" />
-    // }
+    if (loggedIn) {
+        return <Redirect to="/userSerchHospital" />
+    }
 
     return (
         <React.Fragment>

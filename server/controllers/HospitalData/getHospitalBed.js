@@ -46,3 +46,17 @@ export const GetHospitalBedByEmailId=async(req, res)=>{
         res.status(400).json({msg:error.message})
     }
 }
+
+export const GetHospitalByHosPinCode=async(req,res)=>{
+    try{
+        const hosPinCode=req.params.hosPinCode
+        const hospitalData=await HospitalBed.find({hosPinCode:hosPinCode})
+        if(!hospitalData) throw Error("No Data Found")
+        else{
+        res.status(200).json({hospitalData:hospitalData, status:200})
+        }
+    }
+    catch(error){
+        res.status(400).json({msg: error.message})
+    }
+ }  

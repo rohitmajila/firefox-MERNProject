@@ -6,3 +6,7 @@ export const USER_DATA='USER_DATA'
 export const LOGOUT='LOGOUT'
 export const USER_HOME='USER_HOME'
 export const COVID_BED_DATA='COVID_BED_DATA'
+
+export const USER_REGISTER_SUCCESS='LOGOUT'
+export const USER_LOGIN_SUCCESS='USER_HOME'
+export const USER_LOGOUT='COVID_BED_DATA'

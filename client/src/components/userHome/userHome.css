@@ -1,0 +1,14 @@
+
+
+.header{
+    background-color: rgb(60, 121, 211);
+    height: 32px;
+    font-size: 20px;
+    font-weight: 400;
+    color: aliceblue;
+}
+
+.cardDisplay{
+    display: inline-block;
+    padding: 0px 42px 0px 0px;
+}

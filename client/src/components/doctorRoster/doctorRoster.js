@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import "./docRoster.css"
+import { object } from 'prop-types';
 
 
 
-
-function DoctorRoster(props) {
+function DoctorRoster (props)  {
+    console.log(props)
     const history=useHistory();
     const userData = useSelector(state => state)
     const email = userData?.loggedUser?.user?.user?.email
@@ -16,6 +17,39 @@ function DoctorRoster(props) {
     const [personalCount, setPersonalCount] = useState(2)
     const [professionalCount, setProfessionalCount] = useState(2)
     const [doctorData, setDoctorData] = useState({
+        email:email,
+        firstName: null,
+        lastName: null,
+        fullName: null,
+        dateOfBirth:null,
+        doctorEmail: null,
+        phoneNumber: null,
+        bloodGroup: null,
+        graduationCollege: null,
+        graduationPercentage: null,
+        masterCollege:  null,
+        masterPercentage:  null,
+        totalExperience: null,
+        departName: null,
+        specilzation: null,
+        docDescription: null,
+        researchDescription: null
+    })
+
+    const handleTabChange = (tab) => {
+        if (tab == "personal") {
+            setPersonalCount(personalCount + 1)
+            setTabChange("personal")
+        }
+
+        if (tab == "professional") {
+            setProfessionalCount(professionalCount + 1)
+            setProffesionalTabChange("professional")
+        }
+    }
+
+    useEffect( ()=>{
+        setDoctorData({
         email:email,
         firstName: props?.doctorData?.firstName,
         lastName: props?.doctorData?.lastName,
@@ -33,19 +67,8 @@ function DoctorRoster(props) {
         specilzation: props?.doctorData?.specilzation,
         docDescription: props?.doctorData?.docDescription,
         researchDescription: props?.doctorData?.researchDescription
-    })
-
-    const handleTabChange = (tab) => {
-        if (tab == "personal") {
-            setPersonalCount(personalCount + 1)
-            setTabChange("personal")
-        }
-
-        if (tab == "professional") {
-            setProfessionalCount(professionalCount + 1)
-            setProffesionalTabChange("professional")
-        }
-    }
+        })
+    },[])
 
 
     const handelChange = (inputType, stateName, value) => {
@@ -70,7 +93,8 @@ function DoctorRoster(props) {
         })
        
     }
-console.log(props)
+console.log( props?props?.doctorData?props?.doctorData?.firstName?props?.doctorData?.firstName:"":"":"")
+
     return (
         <React.Fragment>
             <div>
@@ -82,7 +106,7 @@ console.log(props)
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label htmlFor="firstName">First Name </label>
-                                    <input type="text" class="form-control" value={doctorData.firstName} onChange={(e) => handelChange("input", "firstName", e.target.value)} />
+                                    <input type="text" class="form-control" value={doctorData.firstName?doctorData.firstName:""} onChange={(e) => handelChange("input", "firstName", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">

@@ -151,7 +151,7 @@ function UserHomePage() {
 
                             <div class="form-group">
                                 <label htmlFor="totBeds" className="text-light">Total No of COVID Beds</label>
-                                <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "totBeds", e.target.value))} value={hosBed.totBeds} />
+                                <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input","totBeds", e.target.value))} value={hosBed.totBeds} />
                             </div>
 
                             <div class="form-group">

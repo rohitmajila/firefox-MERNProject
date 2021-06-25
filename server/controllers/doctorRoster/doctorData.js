@@ -59,7 +59,7 @@ export const PostDoctorData=async (req, res)=>{
         res.status(200).json({
             message:"Doctor Data Updated Sucessfully",
             id:DoctorHosData.id,
-            docEmail:DoctorHosData.doctorEmail
+            docEmail:DoctorHosData.doctorEmail,
         })
     }
     }
@@ -67,8 +67,6 @@ export const PostDoctorData=async (req, res)=>{
     catch(error){
         res.status(505).json({ message: error.message })
     }
-
-
 }
 
 export const GetDoctorData=async(req,res)=>{
@@ -84,3 +82,4 @@ export const GetDoctorData=async(req,res)=>{
         res.status(400).json({msg: error.message})
     }
  }   
+

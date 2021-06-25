@@ -46,13 +46,13 @@ export const loginPost = async (req,res)=>{
 
        const token=jwt.sign({id:user._id}, JWT_SECRET, {expiresIn:3600});
        if(!token) throw Error ('Coudnt Sign the token')
-      
        res.json({
            token,
            user:{
                id:user._id,
                name:user.name,
                email:user.email,
+               pinCode:user.hosPinCode
            }
        })   
         
