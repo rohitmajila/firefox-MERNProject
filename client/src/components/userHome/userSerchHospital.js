@@ -59,7 +59,8 @@ function SearchHospital() {
             <h1>Search Hospital</h1>
             <div className="row">
                 <div className="col-md-5 offset-md-1">
-                    <input class="form-control me-2" type="number" onChange={((e) => setHosPinCode(e.target.value))} value={hosPinCode} type="search" placeholder="Search" aria-label="Search" />
+                    <input class="form-control me-2" type="number" placeholder="Search by Pin Code"
+                     onChange={((e) => setHosPinCode(e.target.value))} value={hosPinCode} type="search"  aria-label="Search" />
                 </div>
                 <div className="col-md-2">
                     <button class="btn btn-primary" type="submit" onClick={postDataToApi}>Search</button>

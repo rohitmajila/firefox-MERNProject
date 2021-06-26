@@ -59,7 +59,8 @@ const DoctorSlot = (props) => {
             doctorEmail:doctorEmail,
             slotDate:todayDate,
             slotTimeFrom:slotTimeFrom,
-            slotTimeTo:slotTimeTo
+            slotTimeTo:slotTimeTo,
+            bookStatus:"open"
         }
         console.log(data)
         const url="http://localhost:5000/doctorSlotData";
@@ -139,6 +140,7 @@ const DoctorSlot = (props) => {
                         <AgGridColumn headerName="Slot Date" field="slotDate" />
                         <AgGridColumn headerName="Slot Time From" field="slotTimeFrom" />
                         <AgGridColumn headerName="Slot Time To" field="slotTimeTo" />
+                        <AgGridColumn headerName="Booking Status" field="bookStatus" />
                     </AgGridReact>
                 </div>
             </div>

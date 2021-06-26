@@ -6,7 +6,8 @@ const doctorSlotSchema=mongoose.Schema({
     fullName:{type:String},
     slotDate:{type:String},
     slotTimeFrom:{type:String},
-    slotTimeTo:{type:String}
+    slotTimeTo:{type:String},
+    bookStatus:{type:String}
 })
 
 const DoctorSlot=mongoose.model("doctorSlotSchema", doctorSlotSchema);
