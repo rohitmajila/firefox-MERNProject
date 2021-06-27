@@ -149,7 +149,9 @@ function App(props) {
             </Route>
 
             <Route exact path="/">
+            <div className="backgroundImage">
               <HospitalBed />
+              </div>
             </Route>
 
             <Route exact path="/hospitalData">

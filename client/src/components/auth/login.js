@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Redirect } from "react-router";
 import { login } from '../../actions/action'
 import { useDispatch, useSelector } from "react-redux";
+import './auth.css'
 
 
 
@@ -36,7 +37,6 @@ function LoginPage() {
         }
         axios.post(url, body, { headers: headers })
             .then(res => {
-                console.log(res)
                 if (res.data.token) {
                     sessionStorage.setItem('user', JSON.stringify(res.data))
                     setvalidation(true)
@@ -60,20 +60,23 @@ function LoginPage() {
             <form>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-5 offset-md-4">
-                            <div className="form-group">
-                                <label htmlFor="registerEmail" className="text-light">Email address *</label>
-                                <input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "email", e.target.value))} value={loginData.email} />
-                                <small id="emailHelp" className="form-text text-light">We'll never share your email with anyone else.</small>
+                        <div className="col-md-5 offset-md-4 columnStyle">
+                            <div className="form-text text-light headerStyle">Hospital Account Login</div>
+                            <div class="card cardStyle">
+                                <div className="form-group">
+                                    <label htmlFor="registerEmail">Hospital Email address *</label>
+                                    <input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "email", e.target.value))} value={loginData.email} />
+                                    <small id="emailHelp" className="form-text">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="password">Password *</label>
+                                    <input type="password" className="form-control" id="password" onChange={((e) => handleChange("input", "password", e.target.value))} value={loginData.password} />
+                                </div>
+                                <div className="form-group">
+                                    <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button>
+                                </div>
+                                {validation == false ? <div className="alert alert-warning">{errorMsg}</div> : ""}
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="password" className="text-light">Password *</label>
-                                <input type="password" className="form-control" id="password" onChange={((e) => handleChange("input", "password", e.target.value))} value={loginData.password} />
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button>
-                            </div>
-                            {validation == false ? <div className="alert alert-warning">{errorMsg}</div> : ""}
                         </div>
                     </div>
                 </div>

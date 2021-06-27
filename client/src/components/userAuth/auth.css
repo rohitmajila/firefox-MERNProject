@@ -13,6 +13,7 @@
     padding: 5px 5px 5px 0px;
 }
 
+
 .messageStyle{
     margin: 0px 0px 0px 56px;
 }
@@ -41,11 +42,9 @@
     background: #f8f9fa;
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
-}
-
-.rgisterDown{
     margin-top: 5%;
 }
+
 
 .register-left img{
     margin-top: 15%;

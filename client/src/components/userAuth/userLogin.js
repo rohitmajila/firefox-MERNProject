@@ -31,14 +31,12 @@ function UserLogin() {
     const submitData = (event) => {
         event.preventDefault();
         let body = JSON.stringify(loginData)
-        console.log(body)
         const url = 'http://localhost:5000/userLogin'
         const headers = {
             'Content-Type': 'application/json',
         }
         axios.post(url, body, { headers: headers })
             .then(res => {
-                console.log(res)
                 if (res.data.token) {
                     sessionStorage.setItem('userLoginData', JSON.stringify(res.data))
                     setvalidation(true)
@@ -62,20 +60,23 @@ function UserLogin() {
             <form>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-5 offset-md-4">
-                            <div className="form-group">
-                                <label htmlFor="userEmail" className="text-light">Email address *</label>
-                                <input type="email" className="form-control" id="userEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "userEmail", e.target.value))} value={loginData.userEmail} />
-                                <small id="emailHelp" className="form-text text-light">We'll never share your email with anyone else.</small>
+                        <div className="col-md-5 offset-md-4 columnStyle">
+                            <div className="form-text text-light headerStyle">User Account Login</div>
+                            <div class="card cardStyle">
+                                <div className="form-group">
+                                    <label htmlFor="userEmail"> User Email address *</label>
+                                    <input type="email" className="form-control" id="userEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "userEmail", e.target.value))} value={loginData.userEmail} />
+                                    <small id="emailHelp" className="form-text">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="userPassword">Password *</label>
+                                    <input type="password" className="form-control" id="userPassword" onChange={((e) => handleChange("input", "userPassword", e.target.value))} value={loginData.userPassword} />
+                                </div>
+                                <div className="form-group">
+                                    <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button>
+                                </div>
+                                {validation == false ? <div className="alert alert-warning">{errorMsg}</div> : ""}
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="userPassword" className="text-light">Password *</label>
-                                <input type="password" className="form-control" id="userPassword" onChange={((e) => handleChange("input", "userPassword", e.target.value))} value={loginData.userPassword} />
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button>
-                            </div>
-                            {validation == false ? <div className="alert alert-warning">{errorMsg}</div> : ""}
                         </div>
                     </div>
                 </div>

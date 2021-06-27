@@ -1,11 +1,27 @@
 
 
-.ag-theme-alpine {
-    --ag-foreground-color: rgb(92, 125, 194);
-}
+/* .ag-theme-alpine {
+    --ag-foreground-color: rgb(53, 96, 190);
+} */
 
 /* or write CSS selectors to make customisations beyond what the parameters support */ */
  .ag-theme-alpine .ag-header {
     text-align: left;
     font-style: oblique;
+    background: none;
+
+    
 }
+
+
+.ag-row-hover {
+    background-color: #dfdfff !important;
+  }
+
+ 
+    .ag-header {
+        font-style:normal;
+        font-size: 15px;      
+    }
+
+  

@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import axios from 'axios'
 
 
 
 function RegisterPage() {
     const [successful, setSuccessful] = useState(null);
-    const [errorMsg, setErrorMsg]=useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const [registerData, setRegisterData] = useState({
         name: null,
         email: null,
-        phoneNo:null,
+        phoneNo: null,
         password: null,
-        hosState:null,
-        hosDistrict:null,
-        hosPinCode:null,
+        hosState: null,
+        hosDistrict: null,
+        hosPinCode: null,
     })
 
     const handleChange = (type, state, value) => {
@@ -37,15 +37,15 @@ function RegisterPage() {
         axios.post(url, body, { headers: headers }).then(response => {
             console.log(response)
             if (response.data.status == 200) {
-                setSuccessful(true);  
+                setSuccessful(true);
             }
-            
+
             else {
                 setSuccessful(false)
                 setErrorMsg(response.data.message)
             }
-           
-        } )
+
+        })
     }
 
     if (successful) {
@@ -55,47 +55,63 @@ function RegisterPage() {
     return (
         <React.Fragment>
             <form>
-                <div class="container">
+                <div class="container register">
                     <div class="row">
-                        <div class="col-md-5 offset-md-4">
-                            <div class="form-group">
-                                <label htmlFor="name" className="text-light">Hospital Name *</label>
-                                <input type="text" className="form-control" id="name" onChange={((e) => handleChange("input", "name", e.target.value))} value={registerData.name} />
-                            </div>
-                            <div class="form-group">
-                                <label htmlFor="userName" className="text-light">Hospital State *</label>
-                                <input type="text" className="form-control" onChange={((e) => handleChange("input", "hosState", e.target.value))} value={registerData.hosState} />
-                            </div>
+                        <div class="col-md-4 register-left">
+                            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+                            <h3>Welcome</h3>
+                            <p>Already have an Hospital Account?</p>
+                            <a className="text-light" href="/login">Login</a>
+                        </div>
+                        <div class="col-md-8 register-right">
+                            <h3 class="register-heading">Register as a Hospital</h3>
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label htmlFor="name" >Hospital Name *</label>
+                                        <input type="text" className="form-control" id="name" onChange={((e) => handleChange("input", "name", e.target.value))} value={registerData.name} />
+                                    </div>
 
-                            <div class="form-group">
-                                <label htmlFor="userName" className="text-light">Hospital District *</label>
-                                <input type="text" className="form-control" onChange={((e) => handleChange("input", "hosDistrict", e.target.value))} value={registerData.hosDistrict} />
-                            </div>
+                                    <div class="form-group">
+                                        <label htmlFor="userName" >Hospital State *</label>
+                                        <input type="text" className="form-control" onChange={((e) => handleChange("input", "hosState", e.target.value))} value={registerData.hosState} />
+                                    </div>
 
-                            <div class="form-group">
-                                <label htmlFor="userName" className="text-light">Pin Code *</label>
-                                <input type="number" min={0} className="form-control" onChange={((e) => handleChange("input", "hosPinCode", e.target.value))} value={registerData.hosPinCode} />
+                                    <div class="form-group">
+                                        <label htmlFor="userName" >Hospital District *</label>
+                                        <input type="text" className="form-control" onChange={((e) => handleChange("input", "hosDistrict", e.target.value))} value={registerData.hosDistrict} />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label htmlFor="userName" >Pin Code *</label>
+                                        <input type="number" min={0} className="form-control" onChange={((e) => handleChange("input", "hosPinCode", e.target.value))} value={registerData.hosPinCode} />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label htmlFor="registerEmail">Email address *</label>
+                                        <input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "email", e.target.value))} value={registerData.email} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label htmlFor="phoneNo" >Phone Number *</label>
+                                        <input type="Number" min={0} className="form-control" id="phoneNo" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "phoneNo", e.target.value))} value={registerData.phoneNo} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label htmlFor="password" >Password *</label>
+                                        <input type="password" class="form-control" id="password" onChange={((e) => handleChange("input", "password", e.target.value))} value={registerData.password} />
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label htmlFor="registerEmail" className="text-light">Email address *</label>
-                                <input type="email" className="form-control" id="registerEmail" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "email", e.target.value))} value={registerData.email} />
-                                <small id="emailHelp" className="form-text text-light">We'll never share your email with anyone else.</small>
+                                <button type="submit" class="btnRegister" onClick={submitData}>Sign Up</button>
+                                {successful == false ? <div className="alert alert-warning messageStyle">{errorMsg}</div> : ""}
                             </div>
-                            <div class="form-group">
-                                <label htmlFor="phoneNo" className="text-light">Phone Number *</label>
-                                <input type="Number" min={0} className="form-control" id="phoneNo" aria-describedby="emailHelp" onChange={((e) => handleChange("input", "phoneNo", e.target.value))} value={registerData.phoneNo} />
-                            </div>
-                            <div class="form-group">
-                                <label htmlFor="password" className="text-light">Password *</label>
-                                <input type="password" class="form-control" id="password" onChange={((e) => handleChange("input", "password", e.target.value))} value={registerData.password} />
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" className="btn btn-primary" onClick={submitData}>Sign in</button> <a className="text-light" href="/login">Already a Member</a>
-                            </div>
-                           {successful==false?<div className="alert alert-warning">{errorMsg}</div>:""}
                         </div>
                     </div>
                 </div>
+
             </form>
 
         </React.Fragment>

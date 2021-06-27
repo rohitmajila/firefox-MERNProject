@@ -6,7 +6,7 @@ export const GetHospitalBed=async(req,res)=>{
         const data=await HospitalBed.find()
         if(!data) throw Error("No Data Found");
 
-        res.status(200).json({hospitalData:data})
+        res.status(200).json({hospitalData:data, status:200})
         
     } catch (error) {
         res.status(400).json({msg: error.message})

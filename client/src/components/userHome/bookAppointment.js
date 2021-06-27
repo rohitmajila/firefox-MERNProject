@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import axios from 'axios';
 import { X } from 'react-bootstrap-icons';
@@ -12,9 +12,9 @@ import './userHome.css';
 
 function BookAppointment() {
     const [cardData, setCardData] = useState([]);
-    const [showModal, setShowModal] = useState(null );
+    const [showModal, setShowModal] = useState(null);
     const [rowData, setRowData] = useState(null);
-    const [msg, setMsg]=useState(null);
+    const [msg, setMsg] = useState(null);
     const gridRef = useRef(null);
 
     const email = window.location.href.split("=")[1]
@@ -53,29 +53,29 @@ function BookAppointment() {
         })
     }
 
-    const submitSelectedRow=()=>{
-        let rows= gridRef.current.api.getSelectedNodes();
+    const submitSelectedRow = () => {
+        let rows = gridRef.current.api.getSelectedNodes();
         let selectedRows = rows?.map(node => node.data);
-        let data={
-            "email":selectedRows[0].email,
-            "fullName":selectedRows[0].fullName,
-            "doctorEmail":selectedRows[0].doctorEmail,
-            "slotDate":selectedRows[0].slotDate,
-            "slotTimeFrom":selectedRows[0].slotTimeFrom,
-            "slotTimeTo":selectedRows[0].slotTimeTo,
-            "bookStatus":"booked",
-            "_id":selectedRows[0]._id
+        let data = {
+            "email": selectedRows[0].email,
+            "fullName": selectedRows[0].fullName,
+            "doctorEmail": selectedRows[0].doctorEmail,
+            "slotDate": selectedRows[0].slotDate,
+            "slotTimeFrom": selectedRows[0].slotTimeFrom,
+            "slotTimeTo": selectedRows[0].slotTimeTo,
+            "bookStatus": "booked",
+            "_id": selectedRows[0]._id
         }
 
-        const headers = {'Content-Type': 'application/json'}
-        const body=JSON.stringify(data)
+        const headers = { 'Content-Type': 'application/json' }
+        const body = JSON.stringify(data)
         const url = `http://localhost:5000/updateDoctorSlotData/${selectedRows[0]._id}`
-        axios.post(url, body, { headers: headers }).then(response=>{
+        axios.post(url, body, { headers: headers }).then(response => {
             console.log(response)
         })
 
         console.log(body)
-        
+
     }
 
     const updateDocDataBtn = () => {
@@ -154,15 +154,15 @@ function BookAppointment() {
                         </div>
                     </div>
                 </div>
-                : 
-             ""
-                }<br/><br/>
+                :
+                ""
+            }<br /><br />
 
-                {showModal==false?
-          
-                    <div >{msg}</div>
-                   
-               :""}
+            {showModal == false ?
+
+                <div >{msg}</div>
+
+                : ""}
 
         </React.Fragment>
     )
