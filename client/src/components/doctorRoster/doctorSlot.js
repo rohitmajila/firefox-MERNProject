@@ -68,6 +68,7 @@ const DoctorSlot = (props) => {
         const body=JSON.stringify(data)
         axios.post(url,body,{ headers: headers }).then(response=>{
             console.log(response)
+            window.location.reload()
         })
    }
 
@@ -107,13 +108,13 @@ const DoctorSlot = (props) => {
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onClick={submitData} >Submit</button>
+                    <button type="submit" class="btn btn-primary btnRosterDocColor" onClick={submitData} >Submit</button>
                 </div>
             </div>
             {showGrid?
             
             <div>
-            <div className="header">
+            <div className="docHeader">
             Doctor Slot
          </div>
            <div style={{ width: '100%', height: '100%' }}>

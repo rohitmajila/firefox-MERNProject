@@ -1,17 +1,36 @@
 .docHeader{
     height: 28px;
-    background-color: cornflowerblue;
-    font-size: 18px;
+    background-color: rgb(79 108 151);
+    font-size: 19px;
+    font-weight: 400;
     font-family: initial;
-    font-weight: 600;
+    color: white
 }
 
-.header{
-    background-color: rgb(60, 121, 211);
+.docMainHeader{
+    height: 35px;
+    background-color: rgb(79 108 151);
+    font-size: 24px;
+    font-weight: 600;
+    font-family: initial;
+    color: white
+}
+
+.docRosterFormHead{
+    padding: 15px 15px 15px 15px;
+}
+
+
+.docRosterheader{
+    background-color: rgb(79 108 151);
     height: 32px;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 400;
-    color: aliceblue;
+    color: white
+}
+
+.btnRosterDocColor{
+    background-color: rgb(79 108 151) !important;
 }
 
 .editHeader{
@@ -19,7 +38,7 @@
     padding: 0px 10px 0px 0px;
 }
 
-.modalStyle{
+.modalDocRosterStyle{
     max-height: 75vh;
     width:90vw;
     height: auto;
@@ -29,6 +48,8 @@
     overflow-x: hidden;
     overflow-y: auto;
     margin-left: auto;
+    background-color: white;
+    margin: 80px 0px 0px 80px;
 }
 
 .overlay {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { login } from '../../actions/action'
 import { useDispatch, useSelector } from "react-redux";
 import './auth.css'
@@ -9,6 +9,7 @@ import './auth.css'
 
 
 function LoginPage() {
+    const history=useHistory()
     const dispatch = useDispatch();
     const [validation, setvalidation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);

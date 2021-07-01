@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./docRoster.css"
-import { object } from 'prop-types';
-
 
 
 function DoctorRoster (props)  {
@@ -93,12 +91,12 @@ function DoctorRoster (props)  {
         })
        
     }
-console.log( props?props?.doctorData?props?.doctorData?.firstName?props?.doctorData?.firstName:"":"":"")
+
 
     return (
         <React.Fragment>
-            <div>
-                <div className="docHeader"> Doctor Details </div> <br />
+            <div className="docRosterFormHead"> 
+               {props.header?"": <div className="docMainHeader"> Doctor Details </div>}<br/>
                 <div className="docHeader" type="button" onClick={() => handleTabChange("personal")}>Personal Details</div>
                 {tabChange == "personal" && personalCount % 2 == 0 ?
                     <div className="container-fluid">
@@ -227,7 +225,7 @@ console.log( props?props?.doctorData?props?.doctorData?.firstName?props?.doctorD
                     : ""}
                 <br/>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onClick={submitData}>Submit</button>
+                    <button type="submit" class="btn btn-primary btnRosterDocColor" onClick={submitData}>Submit</button>
                 </div>
             </div>
 

@@ -83,15 +83,15 @@ const DoctorDataGrid = () => {
     const updateDocDataBtn = () => {
         return (
             <div>
-            <button class="btn btn-primary" onClick={openDocDataModal}>Update</button>&nbsp;
-            <button class="btn btn-primary" onClick={openDocSlotModal}>Open Slot</button>
+            <button class="btn btn-primary btnRosterDocColor" onClick={openDocDataModal}>Update</button>&nbsp;
+            <button class="btn btn-primary btnRosterDocColor" onClick={openDocSlotModal}>Open Slot</button>
             </div>
         )
     }
 
     return (
         <React.Fragment>
-            <div className="header">
+            <div className="docRosterheader">
                 All Hospital Doctor
              </div>
             <div style={{ width: '100%', height: '100%' }}>
@@ -107,12 +107,12 @@ const DoctorDataGrid = () => {
                             filter: 'agTextColumnFilter',
                             floatingFilter: true,
                             resizable: true,
+                            autoHeight: true,
                         }}
                         ref={gridRef}
                         rowData={rowData}
                         onGridReady={onGridReady}
                         onFirstDataRendered={onFirstDataRendered}
-                        // onRowSelected={onSelectionChanged} 
                         rowSelection={'single'}
                         frameworkComponents={{
                             updateDocDataBtn: updateDocDataBtn,
@@ -131,15 +131,15 @@ const DoctorDataGrid = () => {
             </div>
             {openModal ?
                 <div className="overlay">
-                    <div class="modalStyle">
-                        <div className="header">
-                            Update Doctor Data
+                    <div class="modalDocRosterStyle">
+                        <div className="docHeader">
+                            Update Doctor Details
                             <span className="editHeader">
                                 <X color="white" onClick={() => modalChange(false)} size={30} />
                             </span>
                         </div>
                         <div >
-                            <DoctorRoster doctorData={doctorData} />
+                            <DoctorRoster doctorData={doctorData} header={true} />
                         </div>
                     </div>
                 </div>
@@ -147,8 +147,8 @@ const DoctorDataGrid = () => {
 
             {docSlot ?
                 <div className="overlay">
-                    <div class="modalStyle">
-                            <div className="header">
+                    <div class="modalDocRosterStyle">
+                            <div className="docHeader">
                                 Book Doctor Slot
                             <span className="editHeader">
                                     <X color="white" onClick={() => slotMOdalCLose(false)} size={30} />

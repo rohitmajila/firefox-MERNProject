@@ -17,6 +17,13 @@ import BookAppointment from './components/userHome/bookAppointment';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from "react-redux";
 
+import { BagPlusFill} from 'react-bootstrap-icons';
+import { Grid} from 'react-bootstrap-icons';
+import { PersonPlus} from 'react-bootstrap-icons';
+import { Search} from 'react-bootstrap-icons';
+
+
+
 
 
 function App(props) {
@@ -59,22 +66,22 @@ function App(props) {
       }
 
       {currentUser ?
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
           <div className="container-fluid">
-            {userHomeLogin ?
+            {/* {userHomeLogin ? */}
               <div>
-                <a className="navbar-brand" href="/doctorRoster">Doctor Addition</a>
-                <a className="navbar-brand" href="/allDoctorData" >Doctor Data Grid</a>
-                <a className="navbar-brand" href="/hospitalData" >Hospital Bed Data</a>
+                <a className="navbar-brand" href="/doctorRoster"><span title="Doctor Addition"><PersonPlus color="white"  size={20} /></span> </a>
+                <a className="navbar-brand" href="/allDoctorData" ><span title="Doctor Data Grid"><Grid color="white"  size={20} /></span></a>
+                <a className="navbar-brand" href="/hospitalData" > <span title="Hospital Bed Data"><BagPlusFill color="white"  size={20} /></span></a>
               </div>
-              :
-              <div>
-                <a className="navbar-brand" href="/doctorRoster">Doctor Addition</a>
-                <a className="navbar-brand" href="/allDoctorData" >Doctor Data Grid</a>
+              : 
+              {/* <div>  */}
+                {/* <a className="navbar-brand" href="/doctorRoster">Doctor Addition</a> */}
+                {/* <a className="navbar-brand" href="/allDoctorData" >Doctor Data Grid</a> */}
                 {/* <a className="navbar-brand" href="/hospitalData" >Hospital Bed Data</a> */}
-              </div>
+              {/* </div> */}
 
-            }
+            {/* } */}
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -92,7 +99,7 @@ function App(props) {
       {user ?
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/userSerchHospital">Search Hospital</a>
+            <a className="navbar-brand" href="/userSerchHospital"><span title="Search Hospital"><Search color="white"  size={20} />&nbsp;&nbsp;Search Hospital</span></a>
 
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">

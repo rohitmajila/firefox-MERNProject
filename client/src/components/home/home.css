@@ -1,9 +1,25 @@
-.header{
-    background-color: rgb(60, 121, 211);
+.gridHeader{
+    background-color: rgb(79 108 151);
     height: 32px;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 400;
-    color: aliceblue;
+    color: white
+}
+
+.btnColor{
+    background-color: rgb(79 108 151) !important;
+}
+.cardHeader{
+    background-color: rgb(79 108 151) !important;
+    color: white;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.welcomeHeader{
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px 0px 5px 15px;
 }
 
 .editHeader{
@@ -11,14 +27,28 @@
     padding: 0px 10px 0px 0px;
 }
 
-.modalStyle{
+.cardStyle{
+    padding: 5px 5px 0px 10px;
+}
+
+.headerStyle{
+    text-align: inherit;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.bedModalStyle{
     position: fixed; 
     top: 50vh;
     left: 50vw;
     transform: translate(-50%,-50%);
-    height: 450px;
-    width: 722px;
+    height: 500px;
+    width: 800px;
     background-color: white;
+}
+
+.updateBedDataContainer{
+    padding: 0px 10px 10px 10px;
 }
 
 .overlay {

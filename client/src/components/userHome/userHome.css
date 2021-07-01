@@ -1,11 +1,21 @@
 
 
 .header{
-    background-color: rgb(60, 121, 211);
+    background-color: rgb(79 108 151);
     height: 32px;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 400;
-    color: aliceblue;
+    color: white
+}
+
+.btnHospitalColor{
+    background-color: rgb(79 108 151) !important;
+}
+
+.userHomeHeader{
+    font-size: 24px;
+    font-weight: 600;
+    padding: 20px 0px 5px 15px;
 }
 
 .cardDisplay{

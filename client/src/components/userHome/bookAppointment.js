@@ -101,7 +101,7 @@ function BookAppointment() {
                                     <a class="card-link">Experience:{data.totalExperience}</a>
                                     <a class="card-link">Email:{data.doctorEmail}</a>
                                 </div>
-                                <button type="submit" className="btn btn-primary" onClick={() => { getDoctorSlotData(data.doctorEmail) }}>Book Slot</button>
+                                <button type="submit" className="btn btn-primary btnHospitalColor" onClick={() => { getDoctorSlotData(data.doctorEmail) }}>Book Slot</button>
                             </div>
                         </div>
                     </div>

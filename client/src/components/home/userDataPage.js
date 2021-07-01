@@ -9,7 +9,7 @@ import './home.css'
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import '../hospitalData/agGrid.css'
+import './agGrid.css'
 
 
 function UserDataPage() {
@@ -18,6 +18,7 @@ function UserDataPage() {
     const [gridColumnApi, setGridColumnApi] = useState(null);
     const [rowData, setRowData] = useState(null);
     const [openModal, setOpenModal]=useState(false);
+
    
     const onGridReady = (params) => {
         setGridApi(params.api);
@@ -77,13 +78,17 @@ function UserDataPage() {
             })
     }, [])
 
+
     return (
+        
         <React.Fragment>
-            <h1>Welcome {hosBed?.hosName}</h1> 
+            
+            <div>
+            <h1 className="welcomeHeader">Welcome {hosBed?.hosName}</h1> 
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-9">
-                    <div className="header">
+                    <div className="gridHeader">
                         Hospital Dashboard
                     </div>
                         <div
@@ -119,7 +124,7 @@ function UserDataPage() {
 
                     <div className="col-md-3">
                         <div class="card">
-                            <h5 class="card-header">Contact Details</h5>
+                            <h5 class="card-header cardHeader">Contact Details</h5>
                             <div >
                                 <h6>Hospital Name :{hosBed.hosName}</h6>
                                 <h6>Address :{hosBed.hosDistrict}, {hosBed.hosState}, {hosBed.hosPinCode}</h6>
@@ -131,10 +136,10 @@ function UserDataPage() {
                 </div>
 
                 <br />
-
+                
                 <div class="row">
                     <div class="col-md-9">
-                        <div className="header">
+                        <div className="gridHeader">
                             Vacent COVID Beds
                     </div>
                         <div
@@ -165,12 +170,13 @@ function UserDataPage() {
 
 
                 </div>
+            
             </div>
             {openModal ?
                 <div className="overlay">
-                    <div class="modalStyle">
+                    <div class="bedModalStyle">
                         <div class="modal-content">
-                            <div className="header">
+                            <div className="gridHeader">
                                 Update Bed Data
                             <span className="editHeader">
                                     <X color="white" onClick={() => modalChange(false)} size={30} />
@@ -183,7 +189,8 @@ function UserDataPage() {
                     </div>
                 </div>
                 : ""}
-
+            </div>
+            
         </React.Fragment>
     )
 

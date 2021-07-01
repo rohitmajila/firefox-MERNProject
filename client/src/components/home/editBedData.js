@@ -102,7 +102,7 @@ function UpdateBedData() {
 
     return (
         <React.Fragment>
-            <div className="container">
+            <div className="updateBedDataContainer">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -144,7 +144,7 @@ function UpdateBedData() {
                 </div>
         
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onClick={submitData}>Update Data</button>
+                    <button type="submit" class="btn btn-primary btnColor" onClick={submitData}>Update Data</button>
                 </div>
                 {bedValid?<span style={{color:"red"}} >{bedValid ? bedValid:""}</span>:""}
             </div>

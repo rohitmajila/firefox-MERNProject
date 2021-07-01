@@ -14,7 +14,7 @@ const HospitalBed = () => {
     const [showGrid, setShowGrid] = useState(false);
     const [msg, setMsg] = useState("");
 
-   
+
 
     const getServerData = () => {
         const url = `http://localhost:5000/doctorDataByHosPin/${hosPinCode}`
@@ -64,37 +64,37 @@ const HospitalBed = () => {
                 </div>
 
                 {showGrid ?
-                <div style={{ width: '100%', height: '100%' }}>
-                    <div
-                        style={{
-                            height: '47vh',
-                            width: '100%',
-                        }}
-                        className="ag-theme-material"
-                    >
-                        <AgGridReact
-                            defaultColDef={{
-                                filter: 'agTextColumnFilter',
-                                floatingFilter: true,
-                                resizable: true,
+                    <div style={{ width: '100%', height: '100%' }}>
+                        <div
+                            style={{
+                                height: '47vh',
+                                width: '100%',
                             }}
-                            rowData={rowData}
-                            onFirstDataRendered={onFirstDataRendered}
+                            className="ag-theme-material"
                         >
-                            <AgGridColumn headerName="Hospital Name" field="hosName" />
-                            <AgGridColumn headerName="State" field="hosState" />
-                            <AgGridColumn headerName="District" field="hosDistrict" />
-                            <AgGridColumn headerName="Pin Code" field="hosPinCode" />
-                            <AgGridColumn headerName="Total COVID Bed" field="totBeds" />
-                            <AgGridColumn headerName="Bed Occupied" field="ocupBeds" />
-                            <AgGridColumn headerName="Bed Vacent" field="vacBeds" />
-                        </AgGridReact>
+                            <AgGridReact
+                                defaultColDef={{
+                                    filter: 'agTextColumnFilter',
+                                    floatingFilter: true,
+                                    resizable: true,
+                                }}
+                                rowData={rowData}
+                                onFirstDataRendered={onFirstDataRendered}
+                            >
+                                <AgGridColumn headerName="Hospital Name" field="hosName" />
+                                <AgGridColumn headerName="State" field="hosState" />
+                                <AgGridColumn headerName="District" field="hosDistrict" />
+                                <AgGridColumn headerName="Pin Code" field="hosPinCode" />
+                                <AgGridColumn headerName="Total COVID Bed" field="totBeds" />
+                                <AgGridColumn headerName="Bed Occupied" field="ocupBeds" />
+                                <AgGridColumn headerName="Bed Vacent" field="vacBeds" />
+                            </AgGridReact>
+                        </div>
                     </div>
-                </div>
-                : ""}
+                    : ""}
             </div>
 
-         
+
 
         </React.Fragment>
     )

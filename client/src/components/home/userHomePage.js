@@ -3,9 +3,10 @@ import axios from 'axios';
 import {userHome }from '../../actions/action';
 import { useHistory, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import './home.css';
 
 
-function UserHomePage() {
+function UserHomePage(props) {
     const dispatch=useDispatch();
     const history = useHistory()
     const userData = useSelector(state => state)
@@ -120,7 +121,7 @@ function UserHomePage() {
                     console.log(response)
                     if (response.status == 200) {
                         dispatch(userHome(true))
-                        history.replace('/hospitalData')
+                       
                     }
                     else {
                         alert("Error Occured While Submiting Data")
@@ -144,53 +145,59 @@ function UserHomePage() {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-4 offset-md-1">
+                        <div className="form-text text-light headerStyle">Hospital Bed Data</div>
+                        <div class="card cardStyle">
                             <div class="form-group">
-                                <label htmlFor="userName" className="text-light">Hospital Name</label>
+                                <label htmlFor="userName" >Hospital Name</label>
                                 <input type="text" class="form-control" disabled value={userData?.loggedUser?.user?.user?.email} />
                             </div>
 
                             <div class="form-group">
-                                <label htmlFor="totBeds" className="text-light">Total No of COVID Beds</label>
+                                <label htmlFor="totBeds" >Total No of COVID Beds</label>
                                 <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input","totBeds", e.target.value))} value={hosBed.totBeds} />
                             </div>
 
                             <div class="form-group">
-                                <label htmlFor="ocupBeds" className="text-light">Bed Occupied</label>
+                                <label htmlFor="ocupBeds" >Bed Occupied</label>
                                 <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "ocupBeds", e.target.value))} value={hosBed.ocupBeds} />
                             </div>
 
                             <div class="form-group">
-                                <label htmlFor="vacBeds" className="text-light">Bed Vacent</label>
+                                <label htmlFor="vacBeds" >Bed Vacent</label>
                                 <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "vacBeds", e.target.value))} value={hosBed.vacBeds} />
                             </div>
                             <br />
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary" onClick={submitData}>Register</button>
+                           
+                        </div><br/>
+                        <div class="form-group">
+                                <button type="submit" class="btn btn-primary" onClick={submitData}>Submit</button>
                             </div>
-
                         </div>
 
                         {vacBedModal?
                             <div class="col-md-4 offset-md-2 ">
+                                <div className="form-text text-light headerStyle">Vacent Bed Data</div>
+                                 <div class="card cardStyle">
                                 <div class="form-group">
-                                    <label htmlFor="vacBeds" className="text-light">Vacent COVID Bed</label>
+                                    <label htmlFor="vacBeds" >Vacent COVID Bed</label>
                                     <input class="form-control" type="number" min={0} disabled value={hosBed.vacBeds} />
                                 </div>
 
                                 <div class="form-group">
-                                    <label htmlFor="vacBeds" className="text-light">ICU COVID Beds</label>
+                                    <label htmlFor="vacBeds" >ICU COVID Beds</label>
                                     <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "icuBeds", e.target.value))} value={hosBed.icuBeds} />
                                 </div>
 
                                 <div class="form-group">
-                                    <label htmlFor="vacBeds" className="text-light">Oxygen COVID Beds</label>
+                                    <label htmlFor="vacBeds" >Oxygen COVID Beds</label>
                                     <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "oxygenBed", e.target.value))} value={hosBed.oxygenBed} />
                                 </div>
 
                                 <div class="form-group">
-                                    <label htmlFor="vacBeds" className="text-light">Normal COVID Beds</label>
+                                    <label htmlFor="vacBeds" >Normal COVID Beds</label>
                                     <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "normalBed", e.target.value))} value={hosBed.normalBed} />
                                 </div>
+                            </div>
                             </div>
                             :
                             ""

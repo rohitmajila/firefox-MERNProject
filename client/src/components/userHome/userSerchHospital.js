@@ -56,14 +56,15 @@ function SearchHospital() {
 
     return (
         <React.Fragment>
-            <h1>Search Hospital</h1>
+            <h1 className="userHomeHeader">Search Hospital</h1>
+            <div className="container-fluid">
             <div className="row">
                 <div className="col-md-5 offset-md-1">
                     <input class="form-control me-2" type="number" placeholder="Search by Pin Code"
                      onChange={((e) => setHosPinCode(e.target.value))} value={hosPinCode} type="search"  aria-label="Search" />
                 </div>
                 <div className="col-md-2">
-                    <button class="btn btn-primary" type="submit" onClick={postDataToApi}>Search</button>
+                    <button class="btn btn-primary btnHospitalColor" type="submit" onClick={postDataToApi}>Search</button>
                 </div>
             </div>
             <br />
@@ -101,6 +102,7 @@ function SearchHospital() {
                     </div>
                 </div>
                 : ""}
+                </div>
         </React.Fragment>
     )
 
