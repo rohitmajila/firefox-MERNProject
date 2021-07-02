@@ -44,7 +44,7 @@ const DoctorDataGrid = () => {
 
 
     React.useEffect(() => {
-        const url = `http://localhost:5000/allDoctorData/${email}`
+        const url = `http://65.1.109.236:5000/allDoctorData/${email}`
         axios.get(url).then(response => {
             console.log(response)
             setRowData(response.data.allDoctorData)

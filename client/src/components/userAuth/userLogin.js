@@ -31,7 +31,7 @@ function UserLogin() {
     const submitData = (event) => {
         event.preventDefault();
         let body = JSON.stringify(loginData)
-        const url = 'http://localhost:5000/userLogin'
+        const url = 'http://65.1.109.236:5000/userLogin'
         const headers = {
             'Content-Type': 'application/json',
         }

@@ -80,7 +80,7 @@ function DoctorRoster (props)  {
 
     const submitData = (event) => {
         event.preventDefault();
-        const url=`http://localhost:5000/doctorData/${doctorData.doctorEmail}`
+        const url=`http://65.1.109.236:5000/doctorData/${doctorData.doctorEmail}`
         let body=JSON.stringify(doctorData);
         const headers = {
             'Content-Type': 'application/json',
