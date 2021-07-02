@@ -120,7 +120,8 @@ function UserHomePage(props) {
                 axios.post(url, body, { headers: headers }).then(response => {
                     console.log(response)
                     if (response.status == 200) {
-                        dispatch(userHome(true))
+                        // dispatch(userHome(true))
+                        history.push("/hospitalData")
                        
                     }
                     else {

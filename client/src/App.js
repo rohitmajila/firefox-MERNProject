@@ -65,7 +65,7 @@ function App(props) {
         </nav>
       }
 
-      {currentUser ?
+      { currentUser ?
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <div className="container-fluid">
             {/* {userHomeLogin ? */}
@@ -74,14 +74,15 @@ function App(props) {
                 <a className="navbar-brand" href="/allDoctorData" ><span title="Doctor Data Grid"><Grid color="white"  size={20} /></span></a>
                 <a className="navbar-brand" href="/hospitalData" > <span title="Hospital Bed Data"><BagPlusFill color="white"  size={20} /></span></a>
               </div>
-              : 
-              {/* <div>  */}
-                {/* <a className="navbar-brand" href="/doctorRoster">Doctor Addition</a> */}
-                {/* <a className="navbar-brand" href="/allDoctorData" >Doctor Data Grid</a> */}
-                {/* <a className="navbar-brand" href="/hospitalData" >Hospital Bed Data</a> */}
-              {/* </div> */}
+               {/* :  */}
+               {/* <div>   */}
+                 {/* <a className="navbar-brand" href="/doctorRoster"><span title="Doctor Addition"><PersonPlus color="white"  size={20} /></span></a>  */}
+                 {/* <a className="navbar-brand" href="/allDoctorData" ><span title="Doctor Data Grid"><Grid color="white"  size={20} /></span></a>  */}
+                 {/* <a className="navbar-brand" href="/hospitalData" > <span title="Hospital Bed Data"><BagPlusFill color="white"  size={20} /></span></a> */}
+               {/* </div>  */}
+              
 
-            {/* } */}
+              {/* } */}
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
