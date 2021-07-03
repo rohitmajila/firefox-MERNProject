@@ -77,7 +77,7 @@ function UpdateBedData() {
         validateData().then(promise => {
             if (promise) {
             setBedValid("")
-            const url = `http://65.1.109.236:5000/hospitalBed/${email}`
+            const url = `http://15.206.186.179:5000/hospitalBed/${email}`
             const headers = {
                 'Content-Type': 'application/json',
             }
