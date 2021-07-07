@@ -45,6 +45,7 @@ function BookAppointment() {
             if (response.data.status == 200 && response.data.doctorSlotData.length > 0) {
                 setRowData(response.data.doctorSlotData)
                 setShowModal(true)
+                updateDocDataBtn(response.data.doctorSlotData)
             }
             else {
                 setMsg("No appointment slot is available. Please check for other doctor")
@@ -72,16 +73,27 @@ function BookAppointment() {
         const url = `http://localhost:5000/updateDoctorSlotData/${selectedRows[0]?._id}`
         axios.post(url, body, { headers: headers }).then(response => {
             console.log(response)
+            if(response.data.status==200){
+                window.location.reload()
+            }
         })
 
-        console.log(body)
+
 
     }
 
-    const updateDocDataBtn = () => {
+    const updateDocDataBtn = (rowData) => {
+        console.log(rowData.data)
+        let bookStatus=rowData?.data?.bookStatus?.toLowerCase()
+      
         return (
+         
             <div>
+                {bookStatus=="booked"?
+                <button class="btn btn-primary" disabled >Book Slot</button>
+                :
                 <button class="btn btn-primary" onClick={submitSelectedRow}>Book Slot</button>
+                }
             </div>
         )
     }
@@ -123,7 +135,7 @@ function BookAppointment() {
                             <div style={{ width: '100%', height: '100%' }}>
                                 <div
                                     style={{
-                                        height: '50vh',
+                                        height: '100%',
                                         width: '100%',
                                     }}
                                     className="ag-theme-alpine"
@@ -134,6 +146,7 @@ function BookAppointment() {
                                             resizable: true,
                                             autoHeight: true,
                                         }}
+                                        domLayout='autoHeight'
                                         ref={gridRef}
                                         rowSelection={'single'}
                                         rowData={rowData}

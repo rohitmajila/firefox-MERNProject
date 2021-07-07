@@ -120,7 +120,7 @@ const DoctorSlot = (props) => {
            <div style={{ width: '100%', height: '100%' }}>
                 <div
                     style={{
-                        height: '50vh',
+                        height: '100%',
                         width: '100%',
                     }}
                     className="ag-theme-alpine"
@@ -131,7 +131,7 @@ const DoctorSlot = (props) => {
                             floatingFilter: true,
                             resizable: true,
                         }}
-                     
+                        domLayout='autoHeight'
                         rowData={rowData}
                         onGridReady={onGridReady}
                         onFirstDataRendered={onFirstDataRendered}

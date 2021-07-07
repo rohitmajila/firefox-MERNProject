@@ -51,7 +51,6 @@ function SearchHospital() {
 
     if (bookDoctorPage) {
         history.push(`/bookDoctorAppointment?email=${hosEmail}`)
-        // return <Redirect to={`/bookDoctorAppointment?email=${hosEmail}`} />
     }
 
 
@@ -78,7 +77,7 @@ function SearchHospital() {
                     </div>
                     <div
                         style={{
-                            height: '100vh',
+                            height: '100%',
                             width: '100%',
                         }}
                         className="ag-theme-alpine"
@@ -88,7 +87,9 @@ function SearchHospital() {
                                 filter: 'agTextColumnFilter',
                                 floatingFilter: true,
                                 resizable: true,
+                                autoHeight: true,
                             }}
+                            domLayout='autoHeight'
                             rowData={rowData}
                             onGridReady={onGridReady}
                             onFirstDataRendered={onFirstDataRendered}

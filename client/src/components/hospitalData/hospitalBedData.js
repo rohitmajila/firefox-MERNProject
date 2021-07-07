@@ -79,6 +79,7 @@ const HospitalBed = () => {
                                     resizable: true,
                                 }}
                                 rowData={rowData}
+                                domLayout='autoHeight'
                                 onFirstDataRendered={onFirstDataRendered}
                             >
                                 <AgGridColumn headerName="Hospital Name" field="hosName" />

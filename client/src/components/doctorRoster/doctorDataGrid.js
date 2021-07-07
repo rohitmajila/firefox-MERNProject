@@ -97,7 +97,7 @@ const DoctorDataGrid = () => {
             <div style={{ width: '100%', height: '100%' }}>
                 <div
                     style={{
-                        height: '100vh',
+                        height: '100%',
                         width: '100%',
                     }}
                     className="ag-theme-alpine"
@@ -109,6 +109,7 @@ const DoctorDataGrid = () => {
                             resizable: true,
                             autoHeight: true,
                         }}
+                        domLayout='autoHeight'
                         ref={gridRef}
                         rowData={rowData}
                         onGridReady={onGridReady}

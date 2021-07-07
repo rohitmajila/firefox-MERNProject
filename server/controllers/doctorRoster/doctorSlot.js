@@ -20,7 +20,7 @@ export const UpdateDoctorSlotData=async (req,res)=>{
     const upadateData= await DoctorSlot.findByIdAndUpdate(_id, req.body, { useFindAndModify: false });
     const upadateSlotData=await upadateData.save();
     if(!upadateSlotData) throw Error("Something Went Wrong")
-    res.status(200).json({message:"Data updated Sucessfullt", id:upadateSlotData._id, doctorEmail:upadateSlotData.doctorEmail})
+    res.status(200).json({message:"Data updated Sucessfullt", status:200, id:upadateSlotData._id, doctorEmail:upadateSlotData.doctorEmail})
 }
 
 export const GetDoctorSlotData = async (req, res) => {

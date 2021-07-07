@@ -148,35 +148,35 @@ function App() {
               <Route exact path="/userHomePage">
                 <UserHomePage />
               </Route> :
-              <Route exact path="*" render={() => <Redirect to="/login" />} />
+              <Route exact path="*" render={() => <Redirect to="/" />} />
             }
 
             {authRouteCurrent || authUser ?
               <Route exact path="/hospitalData">
                 <UserDataPage />
               </Route> :
-              <Route exact path="*" render={() => <Redirect to="/login" />} />
+              <Route exact path="*" render={() => <Redirect to="/" />} />
             }
 
             {authRouteCurrent || authUser ?
               <Route exact path="/doctorRoster">
                 <DoctorRoster />
               </Route> :
-              <Route exact path="*" render={() => <Redirect to="/login" />} />
+              <Route exact path="*" render={() => <Redirect to="/" />} />
             }
 
             {authRouteCurrent || authUser ?
               <Route exact path="/allDoctorData">
                 <DoctorDataGrid />
               </Route> :
-              <Route exact path="*" render={() => <Redirect to="/login" />} />
+              <Route exact path="*" render={() => <Redirect to="/" />} />
             }
 
             {authUser || authRouteCurrent ?
               <Route exact path="/userSerchHospital">
                 <SearchHospital />
               </Route> :
-              <Route exact path="*" render={() => <Redirect to="/userLogin" />} />
+              <Route exact path="*" render={() => <Redirect to="/" />} />
             }
 
             {authUser || authRouteCurrent ?
@@ -184,7 +184,7 @@ function App() {
                 <BookAppointment />
               </Route>
               :
-              <Route exact path="*" render={() => <Redirect to="/userLogin" />} />
+              <Route exact path="*" render={() => <Redirect to="/" />} />
             }
 
           </Switch>
