@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
 
 
 function UserRegister() {
+    const history = useHistory();
     const [successful, setSuccessful] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null)
     const [userRegisterData, setUserRegisterData] = useState({
@@ -27,7 +28,7 @@ function UserRegister() {
         event.preventDefault();
         let body = JSON.stringify(userRegisterData)
         console.log(body)
-        const url = 'http://15.206.186.179:5000/userRegister'
+        const url = 'http://localhost:5000/userRegister'
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -46,7 +47,7 @@ function UserRegister() {
     }
 
     if (successful) {
-        return <Redirect to="/userLogin" />
+        history.push('/userLogin')
     }
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import './agGrid.css';
@@ -9,6 +9,7 @@ import './userHome.css';
 
 
 function SearchHospital() {
+    const history=useHistory();
     const [bookDoctorPage, setBookDoctorPage] = useState(false);
     const [viewGrid, setViewGrid] = useState(false);
     const [hosPinCode, setHosPinCode] = useState(null);
@@ -25,7 +26,7 @@ function SearchHospital() {
 
     const postDataToApi = (event) => {
         event.preventDefault();
-        const url = `http://15.206.186.179:5000/doctorDataByHosPin/${hosPinCode}`
+        const url = `http://localhost:5000/doctorDataByHosPin/${hosPinCode}`
         axios.get(url).then(response => {
             console.log(response)
             if (response.data.status == 200) {
@@ -49,7 +50,8 @@ function SearchHospital() {
     };
 
     if (bookDoctorPage) {
-        return <Redirect to={`/bookDoctorAppointment?email=${hosEmail}`} />
+        history.push(`/bookDoctorAppointment?email=${hosEmail}`)
+        // return <Redirect to={`/bookDoctorAppointment?email=${hosEmail}`} />
     }
 
 

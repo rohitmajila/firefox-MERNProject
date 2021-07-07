@@ -1,6 +1,7 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import RegisterPage from './components/auth/register';
 import LoginPage from './components/auth/login';
 import { ErrorBoundry } from './ErrorBoundry/erorrBoundry';
@@ -14,22 +15,24 @@ import UserLogin from './components/userAuth/userLogin';
 import UserRegister from './components/userAuth/userRegister';
 import SearchHospital from './components/userHome/userSerchHospital';
 import BookAppointment from './components/userHome/bookAppointment';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch, useSelector } from "react-redux";
+import './App.css';
 
-import { BagPlusFill} from 'react-bootstrap-icons';
-import { Grid} from 'react-bootstrap-icons';
-import { PersonPlus} from 'react-bootstrap-icons';
-import { Search} from 'react-bootstrap-icons';
-
-
-
+import { BagPlusFill } from 'react-bootstrap-icons';
+import { Grid } from 'react-bootstrap-icons';
+import { PersonPlus } from 'react-bootstrap-icons';
+import { Search } from 'react-bootstrap-icons';
+import { House } from 'react-bootstrap-icons';
 
 
-function App(props) {
+function App() {
   const user = useSelector(state => state.userLoggedUser.isLoggedIn)
   const currentUser = useSelector(state => state.loggedUser.isLoggedIn)
+  const authRouteCurrent = useSelector(state => state.loggedUser.isLoggedIn)
+  const authUser = useSelector(state => state.userLoggedUser.isLoggedIn)
   const dispatch = useDispatch();
+
   const Logout = () => {
     sessionStorage.removeItem("user")
     dispatch(logout())
@@ -40,17 +43,15 @@ function App(props) {
     dispatch(userLogout())
   }
 
-  console.log(props)
-  const userHomeLogin = useSelector(state => state?.CovidBedData?.userHome)
 
   return (
     <React.Fragment>
 
       {currentUser || user ?
-      "" :
+        "" :
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/">FireFox</a>
+            <a className="navbar-brand" href="/"><span title="Home"><House color="white" size={20} /></span></a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -65,24 +66,14 @@ function App(props) {
         </nav>
       }
 
-      { currentUser ?
+      {currentUser ?
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <div className="container-fluid">
-            {/* {userHomeLogin ? */}
-              <div>
-                <a className="navbar-brand" href="/doctorRoster"><span title="Doctor Addition"><PersonPlus color="white"  size={20} /></span> </a>
-                <a className="navbar-brand" href="/allDoctorData" ><span title="Doctor Data Grid"><Grid color="white"  size={20} /></span></a>
-                <a className="navbar-brand" href="/hospitalData" > <span title="Hospital Bed Data"><BagPlusFill color="white"  size={20} /></span></a>
-              </div>
-               {/* :  */}
-               {/* <div>   */}
-                 {/* <a className="navbar-brand" href="/doctorRoster"><span title="Doctor Addition"><PersonPlus color="white"  size={20} /></span></a>  */}
-                 {/* <a className="navbar-brand" href="/allDoctorData" ><span title="Doctor Data Grid"><Grid color="white"  size={20} /></span></a>  */}
-                 {/* <a className="navbar-brand" href="/hospitalData" > <span title="Hospital Bed Data"><BagPlusFill color="white"  size={20} /></span></a> */}
-               {/* </div>  */}
-              
-
-              {/* } */}
+            <div>
+              <a className="navbar-brand" href="/doctorRoster"><span title="Doctor Addition"><PersonPlus color="white" size={20} /></span> </a>
+              <a className="navbar-brand" href="/allDoctorData" ><span title="Doctor Data Grid"><Grid color="white" size={20} /></span></a>
+              <a className="navbar-brand" href="/hospitalData" > <span title="Hospital Bed Data"><BagPlusFill color="white" size={20} /></span></a>
+            </div>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -100,7 +91,7 @@ function App(props) {
       {user ?
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/userSerchHospital"><span title="Search Hospital"><Search color="white"  size={20} />&nbsp;&nbsp;Search Hospital</span></a>
+            <a className="navbar-brand" href="/userSerchHospital"><span title="Search Hospital"><Search color="white" size={20} />&nbsp;&nbsp;Search Hospital</span></a>
 
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
@@ -118,27 +109,9 @@ function App(props) {
 
 
       <ErrorBoundry>
+
         <Router>
           <Switch>
-            <Route exact path="/login">
-              <div className="backgroundImage">
-                <LoginPage />
-              </div>
-            </Route>
-
-            <Route exact path="/register" >
-              <div className="backgroundImage">
-                <RegisterPage />
-              </div>
-            </Route>
-
-            <Route exact path="/userSerchHospital">
-              <SearchHospital />
-            </Route>
-
-            <Route exact path="/bookDoctorAppointment">
-              <BookAppointment />
-            </Route>
 
             <Route exact path="/userLogin">
               <div className="backgroundImage">
@@ -152,30 +125,70 @@ function App(props) {
               </div>
             </Route>
 
-            <Route exact path="/userHomePage">
-              <UserHomePage />
-            </Route>
-
-            <Route exact path="/">
-            <div className="backgroundImage">
-              <HospitalBed />
+            <Route exact path="/login">
+              <div className="backgroundImage">
+                <LoginPage />
               </div>
             </Route>
 
-            <Route exact path="/hospitalData">
-              <UserDataPage />
+            <Route exact path="/register" >
+              <div className="backgroundImage">
+                <RegisterPage />
+              </div>
             </Route>
 
-            <Route exact path="/doctorRoster">
-              <DoctorRoster />
+            <Route exact path="/">
+              <div className="backgroundImage">
+                <HospitalBed />
+              </div>
             </Route>
 
-            <Route exact path="/allDoctorData">
-              <DoctorDataGrid />
-            </Route>
+
+            {authRouteCurrent || authUser ?
+              <Route exact path="/userHomePage">
+                <UserHomePage />
+              </Route> :
+              <Route exact path="*" render={() => <Redirect to="/login" />} />
+            }
+
+            {authRouteCurrent || authUser ?
+              <Route exact path="/hospitalData">
+                <UserDataPage />
+              </Route> :
+              <Route exact path="*" render={() => <Redirect to="/login" />} />
+            }
+
+            {authRouteCurrent || authUser ?
+              <Route exact path="/doctorRoster">
+                <DoctorRoster />
+              </Route> :
+              <Route exact path="*" render={() => <Redirect to="/login" />} />
+            }
+
+            {authRouteCurrent || authUser ?
+              <Route exact path="/allDoctorData">
+                <DoctorDataGrid />
+              </Route> :
+              <Route exact path="*" render={() => <Redirect to="/login" />} />
+            }
+
+            {authUser || authRouteCurrent ?
+              <Route exact path="/userSerchHospital">
+                <SearchHospital />
+              </Route> :
+              <Route exact path="*" render={() => <Redirect to="/userLogin" />} />
+            }
+
+            {authUser || authRouteCurrent ?
+              <Route exact path="/bookDoctorAppointment">
+                <BookAppointment />
+              </Route>
+              :
+              <Route exact path="*" render={() => <Redirect to="/userLogin" />} />
+            }
 
           </Switch>
-     
+
         </Router>
       </ErrorBoundry>
     </React.Fragment>

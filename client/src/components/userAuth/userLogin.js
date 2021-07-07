@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Redirect } from "react-router";
+import { useHistory } from "react-router";
 import { userLogin } from '../../actions/action';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function UserLogin() {
     const dispatch = useDispatch();
+    const history=useHistory();
     const loggedIn = useSelector(state => state.userLoggedUser.isLoggedIn);
     const [validation, setvalidation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -31,7 +32,7 @@ function UserLogin() {
     const submitData = (event) => {
         event.preventDefault();
         let body = JSON.stringify(loginData)
-        const url = 'http://15.206.186.179:5000/userLogin'
+        const url = 'http://localhost:5000/userLogin'
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -52,7 +53,7 @@ function UserLogin() {
     }
 
     if (loggedIn) {
-        return <Redirect to="/userSerchHospital" />
+        history.push("/userSerchHospital")
     }
 
     return (

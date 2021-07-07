@@ -2,7 +2,6 @@ import { USER_REGISTER_SUCCESS, USER_LOGIN_SUCCESS, USER_LOGOUT} from '../consta
 
 
 const user = JSON.parse(sessionStorage.getItem("userLoginData"));
-console.log(user)
 const initialState=user?
 {isLoggedIn:true, user} 
 :

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { login } from '../../actions/action'
 import { useDispatch, useSelector } from "react-redux";
 import './auth.css'
@@ -32,7 +32,7 @@ function LoginPage() {
     const submitData = (event) => {
         event.preventDefault();
         let body = JSON.stringify(loginData)
-        const url = 'http://15.206.186.179:5000/login'
+        const url = 'http://localhost:5000/login'
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -53,7 +53,7 @@ function LoginPage() {
     }
 
     if (loggedIn) {
-        return <Redirect to="/userHomePage" />
+        history.push("/userHomePage")
     }
 
     return (

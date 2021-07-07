@@ -30,7 +30,7 @@ function BookAppointment() {
     }
 
     useEffect(() => {
-        const url = `http://15.206.186.179:5000/allDoctorData/${email}`
+        const url = `http://localhost:5000/allDoctorData/${email}`
         axios.get(url).then(response => {
             console.log(response)
             setCardData(response.data.allDoctorData)
@@ -39,7 +39,7 @@ function BookAppointment() {
 
 
     const getDoctorSlotData = (doctorEmail) => {
-        const url = `http://15.206.186.179:5000/getDoctorSlot/${doctorEmail}`
+        const url = `http://localhost:5000/getDoctorSlot/${doctorEmail}`
         axios.get(url).then(response => {
             console.log(response)
             if (response.data.status == 200 && response.data.doctorSlotData.length > 0) {
@@ -57,19 +57,19 @@ function BookAppointment() {
         let rows = gridRef.current.api.getSelectedNodes();
         let selectedRows = rows?.map(node => node.data);
         let data = {
-            "email": selectedRows[0].email,
-            "fullName": selectedRows[0].fullName,
-            "doctorEmail": selectedRows[0].doctorEmail,
-            "slotDate": selectedRows[0].slotDate,
-            "slotTimeFrom": selectedRows[0].slotTimeFrom,
-            "slotTimeTo": selectedRows[0].slotTimeTo,
+            "email": selectedRows[0]?.email,
+            "fullName": selectedRows[0]?.fullName,
+            "doctorEmail": selectedRows[0]?.doctorEmail,
+            "slotDate": selectedRows[0]?.slotDate,
+            "slotTimeFrom": selectedRows[0]?.slotTimeFrom,
+            "slotTimeTo": selectedRows[0]?.slotTimeTo,
             "bookStatus": "booked",
-            "_id": selectedRows[0]._id
+            "_id": selectedRows[0]?._id
         }
 
         const headers = { 'Content-Type': 'application/json' }
         const body = JSON.stringify(data)
-        const url = `http://15.206.186.179:5000/updateDoctorSlotData/${selectedRows[0]._id}`
+        const url = `http://localhost:5000/updateDoctorSlotData/${selectedRows[0]?._id}`
         axios.post(url, body, { headers: headers }).then(response => {
             console.log(response)
         })
@@ -132,6 +132,7 @@ function BookAppointment() {
                                         defaultColDef={{
                                             filter: 'agTextColumnFilter',
                                             resizable: true,
+                                            autoHeight: true,
                                         }}
                                         ref={gridRef}
                                         rowSelection={'single'}

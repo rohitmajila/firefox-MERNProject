@@ -23,8 +23,8 @@ router.get('/getDoctorSlot/:doctorEmail', GetDoctorSlotData);
 router.get('/allDoctorData/:email', GetDoctorData);
 router.get('/doctorDataByHosPin/:hosPinCode', GetHospitalByHosPinCode);
 router.get('/hospitalBedGet', GetHospitalBed);
-router.get('/getHospitalBedByEmailId/:email', CombineHosBedByEmailId);
-router.get('/getHospDataByEmailId/:email', GetHospitalBedByEmailId);
+router.get('/getHospitalBedByEmailId/:email',  CombineHosBedByEmailId);    
+router.get('/getHospDataByEmailId/:email',  GetHospitalBedByEmailId);
 
 
 

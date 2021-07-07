@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {userHome }from '../../actions/action';
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import './home.css';
 
 
-function UserHomePage(props) {
-    const dispatch=useDispatch();
+function UserHomePage() {
     const history = useHistory()
     const userData = useSelector(state => state)
     const [bedValid, setBedValid] = useState("")
@@ -16,12 +15,12 @@ function UserHomePage(props) {
         email: userData?.loggedUser?.user?.user?.email,
         hosName: userData?.loggedUser?.user?.user?.name,
         phoneNo:null,
-        totBeds: null,
-        ocupBeds: null,
-        vacBeds: null,
-        icuBeds: null,
-        oxygenBed: null,
-        normalBed: null,
+        totBeds: 0,
+        ocupBeds: 0,
+        vacBeds: 0,
+        icuBeds: 0,
+        oxygenBed: 0,
+        normalBed: 0,
         hosState: null,
         hosDistrict: null,
         hosPinCode: null,
@@ -50,7 +49,7 @@ function UserHomePage(props) {
 
     React.useEffect(() => {
         const email = userData?.loggedUser?.user?.user?.email
-        const url = `http://15.206.186.179:5000/getHospitalBedByEmailId/${email}`
+        const url = `http://localhost:5000/getHospitalBedByEmailId/${email}`
         axios.get(url)
             .then(response => {
                 console.log(response)
@@ -78,9 +77,13 @@ function UserHomePage(props) {
             let total = hosBed.totBeds;
             let occupied = hosBed.ocupBeds;
             let vacent = hosBed.vacBeds;
+            let vacBeds= hosBed.vacBeds;
+            let icuBeds=hosBed.icuBeds;
+            let oxygenBed=hosBed.oxygenBed;
+            let normalBed=hosBed.normalBed
 
             if ((Number(total) === Number(occupied) + Number(vacent)) &&
-                (Number(hosBed.vacBeds) === Number(hosBed.icuBeds) + Number(hosBed.oxygenBed) + Number(hosBed.normalBed))) {
+                (Number(vacBeds) === Number(icuBeds) + Number(oxygenBed) + Number(normalBed))) {
                 resolve(true)
             }
             else {
@@ -113,7 +116,7 @@ function UserHomePage(props) {
         validateData().then(promise => {
             if (promise) {
                 setBedValid("")
-                const url = `http://15.206.186.179:5000/hospitalBed/${email}`
+                const url = `http://localhost:5000/hospitalBed/${email}`
                 const headers = {
                     'Content-Type': 'application/json',
                 }
@@ -136,7 +139,7 @@ function UserHomePage(props) {
     }
 
     if(hosBed.hosIsActive){
-        return <Redirect to="/hospitalData" />
+        history.push('/hospitalData')
     }
 
     return (
@@ -165,7 +168,7 @@ function UserHomePage(props) {
 
                             <div class="form-group">
                                 <label htmlFor="vacBeds" >Bed Vacent</label>
-                                <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "vacBeds", e.target.value))} value={hosBed.vacBeds} />
+                                <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "vacBeds", e.target.value))} value={hosBed.vacBeds?hosBed.vacBeds:"0"} />
                             </div>
                             <br />
                            

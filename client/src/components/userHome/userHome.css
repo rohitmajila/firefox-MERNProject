@@ -26,6 +26,7 @@
 .modalStyle{
     max-height: 75vh;
     width:90vw;
+    margin: 150px 65px 0px 0px;
     height: auto;
     flex-flow:column nowrap;
     display: flex;

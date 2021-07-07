@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import axios from 'axios'
 import './auth.css'
 
 
 
-function RegisterPage() {
+function RegisterPage(props) {
+    console.log(props)
+    const history=useHistory();
     const [successful, setSuccessful] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [registerData, setRegisterData] = useState({
@@ -31,7 +33,7 @@ function RegisterPage() {
         event.preventDefault();
         let body = JSON.stringify(registerData)
         console.log(body)
-        const url = 'http://15.206.186.179:5000/register'
+        const url = 'http://localhost:5000/register'
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -50,7 +52,7 @@ function RegisterPage() {
     }
 
     if (successful) {
-        return <Redirect to="/login" />
+        history.push("/login")
     }
 
     return (

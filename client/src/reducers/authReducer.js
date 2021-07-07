@@ -2,7 +2,7 @@ import { REGISTER_SUCCESS, SET_MESSAGE, REGISTER_FAIL, LOGIN_SUCCESS, LOGOUT } f
 
 
 const user = JSON.parse(sessionStorage.getItem("user"));
-console.log(user)
+
 const initialState=user?
 {isLoggedIn:true, user} 
 :
