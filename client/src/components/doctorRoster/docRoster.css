@@ -7,6 +7,13 @@
     color: white
 }
 
+.gridAlertHeader{
+    background-color: rgb(79 108 151);
+    height: 32px;
+    font-size: 19px;
+    font-weight: 400;
+    color: white
+}
 .docMainHeader{
     height: 35px;
     background-color: rgb(79 108 151);
@@ -31,6 +38,24 @@
 
 .btnRosterDocColor{
     background-color: rgb(79 108 151) !important;
+    line-height: 1 !important;
+    border: 1px solid !important;
+    border-radius: 1.2rem !important;
+    font-size: 12px !important;
+}
+
+.alertGirdStyle{
+    position: fixed; 
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    height: 100px;
+    width: 400px;
+    background-color: white;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: unset;
+
 }
 
 .editHeader{

@@ -5,28 +5,29 @@ import { useSelector } from "react-redux";
 import "./docRoster.css"
 
 
-function DoctorRoster (props)  {
-    console.log(props)
-    const history=useHistory();
+function DoctorRoster(props) {
+    const history = useHistory();
     const userData = useSelector(state => state)
     const email = userData?.loggedUser?.user?.user?.email
+    const [errorMsg, setErrorMsg] = useState("")
+    const [validation, setValidation] = useState(false)
     const [tabChange, setTabChange] = useState("personal")
     const [proffesionalTabChange, setProffesionalTabChange] = useState("professional")
     const [personalCount, setPersonalCount] = useState(2)
     const [professionalCount, setProfessionalCount] = useState(2)
     const [doctorData, setDoctorData] = useState({
-        email:email,
+        email: email,
         firstName: null,
         lastName: null,
         fullName: null,
-        dateOfBirth:null,
+        dateOfBirth: null,
         doctorEmail: null,
         phoneNumber: null,
         bloodGroup: null,
         graduationCollege: null,
         graduationPercentage: null,
-        masterCollege:  null,
-        masterPercentage:  null,
+        masterCollege: null,
+        masterPercentage: null,
         totalExperience: null,
         departName: null,
         specilzation: null,
@@ -46,27 +47,27 @@ function DoctorRoster (props)  {
         }
     }
 
-    useEffect( ()=>{
+    useEffect(() => {
         setDoctorData({
-        email:email,
-        firstName: props?.doctorData?.firstName,
-        lastName: props?.doctorData?.lastName,
-        fullName: props?.doctorData?.fullName,
-        dateOfBirth: props?.doctorData?.dateOfBirth,
-        doctorEmail: props?.doctorData?.doctorEmail,
-        phoneNumber: props?.doctorData?.phoneNumber,
-        bloodGroup: props?.doctorData?.bloodGroup,
-        graduationCollege: props?.doctorData?.graduationCollege,
-        graduationPercentage: props?.doctorData?.graduationPercentage,
-        masterCollege:  props?.doctorData?.masterCollege,
-        masterPercentage:  props?.doctorData?.masterPercentage,
-        totalExperience: props?.doctorData?.totalExperience,
-        departName: props?.doctorData?.departName,
-        specilzation: props?.doctorData?.specilzation,
-        docDescription: props?.doctorData?.docDescription,
-        researchDescription: props?.doctorData?.researchDescription
+            email: email,
+            firstName: props?.doctorData?.firstName,
+            lastName: props?.doctorData?.lastName,
+            fullName: props?.doctorData?.fullName,
+            dateOfBirth: props?.doctorData?.dateOfBirth,
+            doctorEmail: props?.doctorData?.doctorEmail,
+            phoneNumber: props?.doctorData?.phoneNumber,
+            bloodGroup: props?.doctorData?.bloodGroup,
+            graduationCollege: props?.doctorData?.graduationCollege,
+            graduationPercentage: props?.doctorData?.graduationPercentage,
+            masterCollege: props?.doctorData?.masterCollege,
+            masterPercentage: props?.doctorData?.masterPercentage,
+            totalExperience: props?.doctorData?.totalExperience,
+            departName: props?.doctorData?.departName,
+            specilzation: props?.doctorData?.specilzation,
+            docDescription: props?.doctorData?.docDescription,
+            researchDescription: props?.doctorData?.researchDescription
         })
-    },[])
+    }, [])
 
 
     const handelChange = (inputType, stateName, value) => {
@@ -80,23 +81,31 @@ function DoctorRoster (props)  {
 
     const submitData = (event) => {
         event.preventDefault();
-        const url=`http://localhost:5000/doctorData/${doctorData.doctorEmail}`
-        let body=JSON.stringify(doctorData);
-        const headers = {
-            'Content-Type': 'application/json',
+        if (!doctorData.fullName || !doctorData.doctorEmail || !doctorData.phoneNumber ||
+            !doctorData.totalExperience || !doctorData.departName || !doctorData.specilzation) {
+            setErrorMsg("Please Enter All Fields")
+            setValidation(true)
         }
-        axios.post(url,body,{ headers: headers }).then(response=>{
-            console.log(response)
-            history.push('/allDoctorData');
-        })
-       
+        else {
+            const url = `http://localhost:5000/doctorData/${email}`
+            let body = JSON.stringify(doctorData);
+            const headers = {
+                'Content-Type': 'application/json',
+            }
+            axios.post(url, body, { headers: headers }).then(response => {
+                if (response.data.status = 200) {
+                    history.push('/allDoctorData');
+                }
+            })
+        }
+
     }
 
 
     return (
         <React.Fragment>
-            <div className="docRosterFormHead"> 
-               {props.header?"": <div className="docMainHeader"> Doctor Details </div>}<br/>
+            <div className="docRosterFormHead">
+                {props.header ? "" : <div className="docMainHeader"> Doctor Details </div>}<br />
                 <div className="docHeader" type="button" onClick={() => handleTabChange("personal")}>Personal Details</div>
                 {tabChange == "personal" && personalCount % 2 == 0 ?
                     <div className="container-fluid">
@@ -104,7 +113,7 @@ function DoctorRoster (props)  {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label htmlFor="firstName">First Name </label>
-                                    <input type="text" class="form-control" value={doctorData.firstName?doctorData.firstName:""} onChange={(e) => handelChange("input", "firstName", e.target.value)} />
+                                    <input type="text" class="form-control" value={doctorData.firstName ? doctorData.firstName : ""} onChange={(e) => handelChange("input", "firstName", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -115,7 +124,7 @@ function DoctorRoster (props)  {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="fullName">Full Name</label>
+                                    <label htmlFor="fullName">Full Name *</label>
                                     <input type="text" class="form-control" value={doctorData.fullName} onChange={(e) => handelChange("input", "fullName", e.target.value)} />
                                 </div>
                             </div>
@@ -130,14 +139,14 @@ function DoctorRoster (props)  {
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="doctorEmail">Email</label>
+                                    <label htmlFor="doctorEmail">Email *</label>
                                     <input type="email" class="form-control" value={doctorData.doctorEmail} onChange={(e) => handelChange("input", "doctorEmail", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="phoneNumber">Phone Number</label>
-                                    <input type="number" min={0}  class="form-control" value={doctorData.phoneNumber} onChange={(e) => handelChange("input", "phoneNumber", e.target.value)} />
+                                    <label htmlFor="phoneNumber">Phone Number *</label>
+                                    <input type="number" min={0} class="form-control" value={doctorData.phoneNumber} onChange={(e) => handelChange("input", "phoneNumber", e.target.value)} />
                                 </div>
                             </div>
                         </div>
@@ -179,26 +188,26 @@ function DoctorRoster (props)  {
                         </div>
                     </div>
                     : ""}
-                <br/>
+                <br />
                 <div className="docHeader" type="button" onClick={() => handleTabChange("professional")}>Professional Details</div>
                 {proffesionalTabChange == "professional" && professionalCount % 2 == 0 ?
                     <div className="container-fluid">
                         <div className="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="totalExperience">Total Experience </label>
+                                    <label htmlFor="totalExperience">Total Experience *</label>
                                     <input type="number" class="form-control" value={doctorData.totalExperience} onChange={(e) => handelChange("input", "totalExperience", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="departName">Department Name</label>
+                                    <label htmlFor="departName">Department Name *</label>
                                     <input type="text" class="form-control" value={doctorData.departName} onChange={(e) => handelChange("input", "departName", e.target.value)} />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label htmlFor="specilzation">Specilzation</label>
+                                    <label htmlFor="specilzation">Specilzation *</label>
                                     <input type="text" class="form-control" value={doctorData.specilzation} onChange={(e) => handelChange("input", "specilzation", e.target.value)} />
                                 </div>
                             </div>
@@ -223,9 +232,10 @@ function DoctorRoster (props)  {
                         </div>
                     </div>
                     : ""}
-                <br/>
+                <br />
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btnRosterDocColor" onClick={submitData}>Submit</button>
+                    {validation ? <div className="alert alert-warning">{errorMsg}</div> : ""}
                 </div>
             </div>
 

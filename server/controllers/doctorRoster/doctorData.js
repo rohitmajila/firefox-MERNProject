@@ -31,7 +31,8 @@ export const PostDoctorData=async (req, res)=>{
         res.status(200).json({
             message: "Data Post Sucessfully",
             id: DoctorHosData.id,
-            docEmail: DoctorHosData.doctorEmail
+            docEmail: DoctorHosData.doctorEmail,
+            status:200
         })
     }
     else{
@@ -60,6 +61,7 @@ export const PostDoctorData=async (req, res)=>{
             message:"Doctor Data Updated Sucessfully",
             id:DoctorHosData.id,
             docEmail:DoctorHosData.doctorEmail,
+            status:200
         })
     }
     }
@@ -75,7 +77,7 @@ export const GetDoctorData=async(req,res)=>{
         const allDoctorData=await DoctorData.find({email:email})
         if(!allDoctorData) throw Error("No Data Found")
         else{
-        res.status(200).json({allDoctorData:allDoctorData})
+        res.status(200).json({allDoctorData:allDoctorData, message:"Data fetch sucessfully", status:200})
         }
     }
     catch(error){

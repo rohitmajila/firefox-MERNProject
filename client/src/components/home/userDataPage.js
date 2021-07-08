@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux";
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { useHistory } from "react-router-dom";
 import UpdateBedData from './editBedData'
 import {CovidBedData} from '../../actions/action'
 import { X} from 'react-bootstrap-icons';
@@ -14,18 +15,14 @@ import './agGrid.css'
 
 function UserDataPage() {
     const dispatch=useDispatch();
+    const history=useHistory();
     const [gridApi, setGridApi] = useState(null);
     const [gridColumnApi, setGridColumnApi] = useState(null);
     const [rowData, setRowData] = useState(null);
     const [openModal, setOpenModal]=useState(false);
-
-   
-    const onGridReady = (params) => {
-        setGridApi(params.api);
-        setGridColumnApi(params.columnApi);
-
-    }
-   const userData=useSelector(state=>state)
+    const [alertBox, setAlertBox]=useState(false);
+    const [flag, setFlag]=useState(false);
+    const userData=useSelector(state=>state)
     const [hosBed, setHosBed] = useState({
         email: null,
         hosName: null,
@@ -38,6 +35,10 @@ function UserDataPage() {
         phoneNo:null
     })
 
+    const onGridReady = (params) => {
+        setGridApi(params.api);
+        setGridColumnApi(params.columnApi);
+    }
     const onFirstDataRendered = (params) => {
         params.api.sizeColumnsToFit();
     };
@@ -72,17 +73,26 @@ function UserDataPage() {
                     dispatch(CovidBedData(response.data))
                     let dataArray = []
                     dataArray.push(response.data.hospitalBedData)
+                    dataArray.length>0?setFlag(true):setFlag(false)
                     setRowData(dataArray)
+                }
+                else{
+                    setFlag(false)
                 }
 
             })
     }, [])
 
-
-    return (
-        
+    
+    const alertModalClose=()=>{
+        setFlag(false)
+        history.push('/userHomePage')
+    }
+   
+    
+    return (      
         <React.Fragment>
-            
+            {flag?
             <div>
             <h1 className="welcomeHeader">Welcome {hosBed?.hosName}</h1> 
             <div class="container-fluid">
@@ -190,7 +200,25 @@ function UserDataPage() {
                 </div>
                 : ""}
             </div>
-            
+           :
+           <div>
+                <div className="overlay">
+                    <div class="alertStyle">
+                        <div class="modal-content">
+                            <div className="gridHeader">
+                               Alert
+                            <span className="editHeader">
+                                    <X color="white" onClick={alertModalClose} size={30} />
+                                </span>
+                            </div>
+                            <div >
+                            <p>No data to display. First complete the vacent bed data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
         </React.Fragment>
     )
 

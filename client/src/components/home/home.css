@@ -47,6 +47,21 @@
     background-color: white;
 }
 
+.alertStyle{
+    position: fixed; 
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    height: 100px;
+    width: 400px;
+    background-color: white;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: unset;
+
+}
+
+
 .updateBedDataContainer{
     padding: 0px 10px 10px 10px;
 }

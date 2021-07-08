@@ -82,7 +82,7 @@ function LoginPage() {
                     </div>
                 </div>
             </form>
-
+  
         </React.Fragment>
     )
 }
