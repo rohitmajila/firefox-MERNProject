@@ -33,7 +33,7 @@ function RegisterPage(props) {
         event.preventDefault();
         let body = JSON.stringify(registerData)
         console.log(body)
-        const url = 'http://localhost:5000/register'
+        const url = 'http://65.2.74.12:5000/register'
         const headers = {
             'Content-Type': 'application/json',
         }

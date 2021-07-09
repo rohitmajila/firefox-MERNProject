@@ -49,7 +49,7 @@ function UserHomePage() {
 
     React.useEffect(() => {
         const email = userData?.loggedUser?.user?.user?.email
-        const url = `http://localhost:5000/getHospitalBedByEmailId/${email}`
+        const url = `http://65.2.74.12:5000/getHospitalBedByEmailId/${email}`
         axios.get(url)
             .then(response => {
                 console.log(response)
@@ -115,7 +115,7 @@ function UserHomePage() {
         validateData().then(promise => {
             if (promise) {
                 setBedValid("")
-                const url = `http://localhost:5000/hospitalBed/${email}`
+                const url = `http://65.2.74.12:5000/hospitalBed/${email}`
                 const headers = {
                     'Content-Type': 'application/json',
                 }

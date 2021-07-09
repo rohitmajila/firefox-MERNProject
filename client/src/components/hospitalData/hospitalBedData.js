@@ -17,8 +17,8 @@ const HospitalBed = () => {
 
 
     const getServerData = () => {
-        const url = `http://localhost:5000/doctorDataByHosPin/${hosPinCode}`
-        // const url = `http://localhost:5000/hospitalBedGet`
+        const url = `http://65.2.74.12:5000/doctorDataByHosPin/${hosPinCode}`
+        // const url = `http://65.2.74.12:5000/hospitalBedGet`
         axios.get(url)
             .then(response => {
                 console.log(response)

@@ -32,7 +32,7 @@ const DoctorSlot = (props) => {
         setEmail(props?.doctorData?.email)
         setdoctorEmail(props?.doctorData?.doctorEmail)
 
-        const url=`http://localhost:5000/getDoctorSlot/${props?.doctorData?.doctorEmail}`
+        const url=`http://65.2.74.12:5000/getDoctorSlot/${props?.doctorData?.doctorEmail}`
         axios.get(url).then(response=>{
             console.log(response)
             if(response.data.status==200 && response.data.doctorSlotData.length>0){
@@ -63,7 +63,7 @@ const DoctorSlot = (props) => {
             bookStatus:"open"
         }
         console.log(data)
-        const url="http://localhost:5000/doctorSlotData";
+        const url="http://65.2.74.12:5000/doctorSlotData";
         const headers = {'Content-Type': 'application/json'}
         const body=JSON.stringify(data)
         axios.post(url,body,{ headers: headers }).then(response=>{

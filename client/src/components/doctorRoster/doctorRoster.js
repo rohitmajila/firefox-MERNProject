@@ -87,7 +87,7 @@ function DoctorRoster(props) {
             setValidation(true)
         }
         else {
-            const url = `http://localhost:5000/doctorData/${email}`
+            const url = `http://65.2.74.12:5000/doctorData/${email}`
             let body = JSON.stringify(doctorData);
             const headers = {
                 'Content-Type': 'application/json',
