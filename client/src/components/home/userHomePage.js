@@ -74,16 +74,15 @@ function UserHomePage() {
 
     const validateData = () => {
         return new Promise((resolve, reject) => {
-            let total = hosBed.totBeds;
-            let occupied = hosBed.ocupBeds;
-            let vacent = hosBed.vacBeds;
-            let vacBeds= hosBed.vacBeds;
-            let icuBeds=hosBed.icuBeds;
-            let oxygenBed=hosBed.oxygenBed;
-            let normalBed=hosBed.normalBed
+            let total = hosBed.totBeds?hosBed.totBeds:0;
+            let occupied = hosBed.ocupBeds?hosBed.ocupBeds:0;
+            let vacent = hosBed.vacBeds?hosBed.vacBeds:0;
+            let icuBeds=hosBed.icuBeds?hosBed.icuBeds:0;
+            let oxygenBed=hosBed.oxygenBed?hosBed.oxygenBed:0;
+            let normalBed=hosBed.normalBed?hosBed.normalBed:0;
 
             if ((Number(total) === Number(occupied) + Number(vacent)) &&
-                (Number(vacBeds) === Number(icuBeds) + Number(oxygenBed) + Number(normalBed))) {
+                (Number(vacent) === Number(icuBeds) + Number(oxygenBed) + Number(normalBed))) {
                 resolve(true)
             }
             else {
@@ -168,7 +167,7 @@ function UserHomePage() {
 
                             <div class="form-group">
                                 <label htmlFor="vacBeds" >Bed Vacent</label>
-                                <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "vacBeds", e.target.value))} value={hosBed.vacBeds?hosBed.vacBeds:"0"} />
+                                <input class="form-control" type="number" min={0} onChange={((e) => handleChange("input", "vacBeds", e.target.value))} value={hosBed.vacBeds} />
                             </div>
                             <br />
                            
