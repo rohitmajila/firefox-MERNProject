@@ -32,7 +32,7 @@ function LoginPage() {
     const submitData = (event) => {
         event.preventDefault();
         let body = JSON.stringify(loginData)
-        const url = 'http://65.2.74.12:5000/login'
+        const url = 'http://localhost:5000/login'
         const headers = {
             'Content-Type': 'application/json',
         }

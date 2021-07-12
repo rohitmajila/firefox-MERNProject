@@ -26,7 +26,7 @@ function SearchHospital() {
 
     const postDataToApi = (event) => {
         event.preventDefault();
-        const url = `http://65.2.74.12:5000/doctorDataByHosPin/${hosPinCode}`
+        const url = `http://localhost:5000/doctorDataByHosPin/${hosPinCode}`
         axios.get(url).then(response => {
             console.log(response)
             if (response.data.status == 200) {

@@ -54,7 +54,7 @@ function UserDataPage() {
 
     React.useEffect(() => {
         const email = userData?.loggedUser?.user?.user?.email
-        const url = `http://65.2.74.12:5000/getHospDataByEmailId/${email}`
+        const url = `http://localhost:5000/getHospDataByEmailId/${email}`
         axios.get(url)
             .then(response => {
                 console.log(response)

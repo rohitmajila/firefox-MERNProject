@@ -28,7 +28,7 @@ function UserRegister() {
         event.preventDefault();
         let body = JSON.stringify(userRegisterData)
         console.log(body)
-        const url = 'http://65.2.74.12:5000/userRegister'
+        const url = 'http://localhost:5000/userRegister'
         const headers = {
             'Content-Type': 'application/json',
         }
