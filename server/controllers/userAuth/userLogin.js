@@ -28,8 +28,7 @@ try{
         return(res.send({message:"Invalid Credentials", status:400}));
     }
 
-    // const JWT_SECRET=process.env.jwtSecret
-    const JWT_SECRET="AQUERN_847HDJajddjj980"
+    const JWT_SECRET=process.env.jwtSecret
     const token=jwt.sign({id:existingUser._id}, JWT_SECRET,{expiresIn:3600});
     if(!token) throw Error ('Coudnt Sign the token')
     res.json({token,user:{id:existingUser._id,userEmail:existingUser.userEmail}});

@@ -7,8 +7,8 @@ dotenv.config()
 
 
 // const JWT_SECRET=config.get('jwtSecret')//using config
-// const JWT_SECRET=process.env.jwtSecret
-const JWT_SECRET="AQUERN_847HDJajddjj980"
+const JWT_SECRET=process.env.jwtSecret
+
 
 export const loginPost = async (req,res)=>{
 

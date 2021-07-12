@@ -29,8 +29,7 @@ try{
     });
     const saveNewRegisterUser= await newRegisterUser.save();
     if(!saveNewRegisterUser) throw Error("Some thing Went Wrong while saving Data");
-    // const JWT_SECRET = process.env.jwtSecret
-    const JWT_SECRET="AQUERN_847HDJajddjj980"
+    const JWT_SECRET = process.env.jwtSecret
     const token=jwt.sign({id:saveNewRegisterUser._id}, JWT_SECRET, {expiresIn:3600});
     res.status(200).json({token, status: 200, userRegister:{id:saveNewRegisterUser._id, userName:saveNewRegisterUser.userName,userEmail:saveNewRegisterUser.userEmail}});
 }
