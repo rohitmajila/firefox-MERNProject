@@ -1,4 +1,4 @@
-Healthcare amd Medication Portal
+Healthcare and Medication Portal
 
 Healthcare amd Medication Portal built with MERN Stack technology along with Redux for State Management and bootstrap for Styling.
 
